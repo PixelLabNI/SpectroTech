@@ -13,7 +13,7 @@ Se você descobrir uma vulnerabilidade de segurança neste projeto, pedimos que 
 ### Como Relatar
 
 1.  **Não abra um Issue público** no GitHub.
-2.  Envie um e-mail para o mantenedor principal: **[SEU EMAIL DE SEGURANÇA AQUI]** ou `pixellabni.contato@gmail.com` (baseado no footer do projeto).
+2.  Envie um e-mail para o mantenedor principal: `pixellabni@outlook.com` (baseado no footer do projeto).
 3.  Inclua os seguintes detalhes:
     * **Descrição da Vulnerabilidade:** O que é e o que ela permite.
     * **Passos para Reproduzir:** Instruções claras e detalhadas para que possamos validar o problema.
