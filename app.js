@@ -391,7 +391,7 @@ async function fetchSinglePost() {
             postHTML += `
                 <div class="post-footer-cta">
                     <p>Gostou? <a href="index.html">Veja mais posts</a> ou</p>
-                    <a href="https://www.youtube.com/@pixellabni" target="_blank" class="cta-button">Inscreva-se no Canal do YouTube</a>
+                    <a href="https://github.com/PixelLabNI/SpectroTech" target="_blank" class="cta-button">Saiba Sobre a SpectroTech</a>
                 </div>
             `;
 
