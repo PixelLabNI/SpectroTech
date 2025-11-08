@@ -545,12 +545,12 @@ body.dark-mode .skeleton-text {
     font-family: var(--font-heading);
     font-size: 28px;
     margin-bottom: 30px;
-    text-align: center;
+    /* REMOVIDO: text-align: center; para alinhar com o texto ao lado */
 }
 
 .about-content {
     display: flex;
-    align-items: flex-start; /* <<< CORREÇÃO DE ALINHAMENTO APLICADA AQUI */
+    align-items: center; /* ALINHAMENTO CORRIGIDO: Centraliza a logo verticalmente */
     gap: 40px;
 }
 .about-image {
@@ -561,14 +561,14 @@ body.dark-mode .skeleton-text {
     height: 250px;
     border-radius: 50%;
     object-fit: cover;
-    border: 5px solid var(--primary-color); /* MUDANÇA: Cor primária */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efeito de transição */
+    border: 5px solid var(--primary-color); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* NOVO: Efeito hover para a imagem */
 .about-image img:hover {
-    transform: scale(1.03); /* Leve zoom */
-    box-shadow: var(--shadow-hover); /* Sombra mais forte */
+    transform: scale(1.03); 
+    box-shadow: var(--shadow-hover); 
 }
 
 .about-text p {
@@ -680,15 +680,13 @@ footer {
     
     /* MODIFICAÇÃO: Garante que o header seja fixed e ajuste o padding do body */
     header {
-        position: fixed; /* Header Fixo no Mobile */
+        position: fixed; 
         width: 100%;
     }
     
     body {
-        padding-top: 71px; /* Espaçamento para evitar que o conteúdo fique atrás do header */
+        padding-top: 71px; 
     }
-    
-    /* APRIMORAMENTO: REMOVIDO o posicionamento absoluto do #theme-toggle */
     
     #main-nav {
         position: fixed;
@@ -705,7 +703,6 @@ footer {
         overflow-y: auto;
         padding: 40px 25px;
         
-        /* APRIMORAMENTO: Transforma o menu overlay em flex column */
         display: flex;
         flex-direction: column;
     }
@@ -725,15 +722,14 @@ footer {
         padding: 10px 0;
     }
     
-    /* APRIMORAMENTO: Estilos do botão de tema DENTRO do menu mobile */
     #theme-toggle {
-        margin-top: 40px; /* Espaço acima do botão */
+        margin-top: 40px; 
         padding: 12px;
         border: 1px solid var(--border-color);
         border-radius: var(--border-radius);
         background-color: var(--card-bg);
-        width: 100%; /* Ocupa a largura do menu (com padding) */
-        display: flex; /* Para alinhar ícone e texto */
+        width: 100%; 
+        display: flex; 
         justify-content: center;
         align-items: center;
         gap: 10px;
@@ -742,10 +738,10 @@ footer {
     }
     #theme-toggle:hover {
         background-color: var(--border-color);
-        transform: none; /* Remove o scale do desktop */
+        transform: none; 
     }
     .theme-toggle-text {
-        display: inline; /* Mostra o texto no mobile */
+        display: inline; 
     }
     
     .container {
@@ -805,27 +801,36 @@ footer {
         padding: 40px 20px;
         margin: 40px 0;
     }
+    
+    .about-image {
+        display: flex;
+        justify-content: center; /* Centraliza a logo (imagem) sozinha */
+        width: 100%;
+    }
     .about-image img {
         width: 200px;
         height: 200px;
     }
+    
     .about-text {
-        text-align: center;
+        text-align: left; /* Alinha o container de texto à esquerda */
+    }
+
+    .about-text h3, 
+    .about-text h4.about-mission {
+        text-align: left; /* Alinha título e subtítulo à esquerda */
     }
     
-    /* NOVO: Alinha parágrafos à esquerda para melhor leitura */
-    .about-text p {
-        text-align: left;
-    }
-
-    /* NOVO: Garante que o subtítulo fique centralizado */
-    .about-text h4.about-mission {
-        text-align: center;
-    }
-
-    /* NOVO: Garante que as tags fiquem centralizadas */
     .about-topics {
-        justify-content: center;
+        justify-content: flex-start; /* Alinha as tags à esquerda */
+    }
+    
+    .cta-button {
+        display: block; 
+        text-align: center; 
+        max-width: 250px;
+        margin-left: auto; /* CORRIGIDO: Centraliza o botão */
+        margin-right: auto; /* CORRIGIDO: Centraliza o botão */
     }
 
     footer {
