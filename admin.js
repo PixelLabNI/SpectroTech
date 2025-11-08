@@ -19,7 +19,8 @@ import {
     getDoc,
     updateDoc, // Função modular para update
     deleteDoc, // Função modular para delete
-    addDoc // Função modular para add
+    addDoc, // Função modular para add
+    serverTimestamp // NOVO: Para obter o carimbo de data/hora do servidor
 } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 // ==============================================================================
 
@@ -48,12 +49,42 @@ const logoutBtn = document.getElementById('logout-btn');
 const userEmailSpan = document.getElementById('user-email');
 const editorTitle = document.getElementById('editor-title');
 
+// Alerta Global
+const globalAlert = document.getElementById('global-alert');
+
+// NOVO: Definição do tamanho mínimo
+const MIN_WIDTH_ALLOWED = 768;
+
 
 // 2. LÓGICA DE AUTENTICAÇÃO
 // ===================================
 
 /** Atualiza a interface baseada no estado de autenticação. */
 function updateUI(user) {
+    const isMobile = window.innerWidth < MIN_WIDTH_ALLOWED;
+
+    // LÓGICA DE BLOQUEIO NO MOBILE
+    if (isMobile) { 
+        // Exibe o alerta de bloqueio
+        globalAlert.textContent = 'ACESSO RESTRITO: O gerenciamento de conteúdo só é permitido em telas maiores (desktop ou tablet no modo paisagem).';
+        globalAlert.style.display = 'block';
+        
+        // Bloqueia ambas as seções, independentemente do login
+        loginSection.style.display = 'none';
+        dashboardSection.style.display = 'none';
+        document.getElementById('auth-info').style.display = 'none';
+
+        // Se o usuário estiver logado e a tela for pequena, força o logout
+        if (user) {
+            signOut(auth).catch(e => console.error("Erro ao forçar logout:", e));
+        }
+
+        return; // Sai da função, impedindo o resto da lógica
+    } 
+    
+    // Se a tela for permitida:
+    globalAlert.style.display = 'none'; // Garante que o alerta não está visível
+
     if (user) {
         // Logado
         loginSection.style.display = 'none';
@@ -74,10 +105,23 @@ function updateUI(user) {
 // Observador de estado de autenticação
 auth.onAuthStateChanged(updateUI);
 
+// Adiciona um listener para reexecutar a checagem ao redimensionar
+window.addEventListener('resize', () => {
+    updateUI(auth.currentUser);
+});
+
+
 // Evento de Login
 if (loginForm) {
     loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
+        
+        // NOVO: Bloqueia o login se a tela for muito pequena
+        if (window.innerWidth < MIN_WIDTH_ALLOWED) {
+            loginError.textContent = 'Erro: O acesso é bloqueado em dispositivos móveis.';
+            return;
+        }
+
         const email = emailInput.value;
         const password = passwordInput.value;
         loginError.textContent = '';
@@ -105,10 +149,14 @@ if (logoutBtn) {
 
 // 3. FUNÇÕES DO EDITOR (MODAL)
 // ===================================
-// ... (sem alterações)
-
 /** Abre o modal de edição para um novo post ou para editar um existente. */
 function openEditor(postData = null, postId = null) {
+    // NOVO: Verifica se o editor pode ser aberto
+    if (window.innerWidth < MIN_WIDTH_ALLOWED) {
+        alert('A edição é bloqueada em telas pequenas.');
+        return;
+    }
+    
     postForm.reset(); 
     
     if (postId && postData) {
@@ -117,8 +165,8 @@ function openEditor(postData = null, postId = null) {
         document.getElementById('post-title').value = postData.title || '';
         document.getElementById('post-snippet').value = postData.snippet || '';
         document.getElementById('post-content').value = postData.content || '';
-        document.getElementById('post-thumbnail').value = postData.thumbnail || '';
-        document.getElementById('post-youtube').value = postData.youtubeUrl || '';
+        document.getElementById('post-thumbnail').value = postData.thumbnail || null;
+        document.getElementById('post-youtube').value = postData.youtubeUrl || null;
         
         deletePostBtn.style.display = 'inline-flex'; 
     } else {
@@ -155,12 +203,13 @@ if (cancelEditBtn) {
 
 /** Carrega e exibe todos os posts do Firestore. */
 async function fetchAdminPosts() {
-    if (!auth.currentUser) return; 
+    // NOVO: Verifica se o carregamento é permitido
+    if (!auth.currentUser || window.innerWidth < MIN_WIDTH_ALLOWED) return; 
     
     postsList.innerHTML = '<p style="text-align: center; padding: 40px 0;">Carregando posts...</p>';
 
     try {
-        // CORRIGIDO: Usa a sintaxe modular V9
+        // ... (resto da função fetchAdminPosts sem alteração, a lógica de bloqueio está na updateUI)
         const postsQuery = query(postsCollectionRef, orderBy('timestamp', 'desc'));
         const snapshot = await getDocs(postsQuery);
 
@@ -239,6 +288,12 @@ if (postForm) {
     postForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
+        // NOVO: Bloqueia a submissão se a tela for muito pequena
+        if (window.innerWidth < MIN_WIDTH_ALLOWED) {
+             alert('A ação de salvar é bloqueada em telas pequenas.');
+             return;
+        }
+
         const postId = document.getElementById('post-id-hidden').value;
         const savePostBtn = document.getElementById('save-post-btn');
         const originalText = savePostBtn.textContent;
@@ -252,8 +307,8 @@ if (postForm) {
             content: document.getElementById('post-content').value,
             thumbnail: document.getElementById('post-thumbnail').value || null,
             youtubeUrl: document.getElementById('post-youtube').value || null,
-            // Acesso a 'firebase' está disponível via script compat no HTML
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            // CORREÇÃO: Usa a função serverTimestamp() modular, importada no topo do arquivo.
+            timestamp: serverTimestamp()
         };
 
         try {
@@ -263,6 +318,7 @@ if (postForm) {
                 await updateDoc(postDocRef, postData);
                 alert('Post atualizado com sucesso!');
             } else {
+                // Ao criar um novo post, adiciona o carimbo de data/hora
                 await addDoc(postsCollectionRef, postData);
                 alert('Novo post criado com sucesso!');
             }
@@ -285,6 +341,12 @@ if (deletePostBtn) {
     deletePostBtn.addEventListener('click', async () => {
         const postId = document.getElementById('post-id-hidden').value;
         if (!postId) return;
+
+         // NOVO: Bloqueia a exclusão se a tela for muito pequena
+        if (window.innerWidth < MIN_WIDTH_ALLOWED) {
+             alert('A exclusão é bloqueada em telas pequenas.');
+             return;
+        }
 
         if (confirm('Tem certeza de que deseja EXCLUIR este post permanentemente?')) {
             try {

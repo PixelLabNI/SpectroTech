@@ -320,6 +320,20 @@ body.dark-mode {
 }
 
 /* 9. RESPONSIVIDADE (Usabilidade Móvel) */
+
+/* NOVO: Estilo base para Alerta Mobile */
+.mobile-alert {
+    display: none; /* Oculta por padrão em telas maiores */
+    text-align: center;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: var(--border-radius);
+    background-color: var(--danger-color);
+    color: white;
+    font-weight: 700;
+    box-shadow: var(--shadow);
+}
+
 @media (max-width: 768px) {
     .nav-container {
         flex-direction: column;
@@ -366,5 +380,12 @@ body.dark-mode {
     }
     .posts-table .action-col::before {
         content: none;
+    }
+    
+    /* NOVO: Exibir alerta no mobile */
+    .mobile-alert {
+        display: block; /* Exibe no mobile */
+        margin-left: 20px;
+        margin-right: 20px;
     }
 }
