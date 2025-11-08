@@ -670,8 +670,11 @@ footer {
 }
 
 
-/* 12. MEDIA QUERIES (RESPONSIVO) - REVISADO */
+/* =================================================== */
+/* 12. MEDIA QUERIES (RESPONSIVO) - REVISADO          */
+/* =================================================== */
 
+/* 12.1. TABLETS E CELULARES MAIORES */
 @media (max-width: 768px) {
     
     #mobile-menu-toggle {
@@ -836,8 +839,30 @@ footer {
     footer {
         padding: 30px 0;
     }
+    
+    /* --- Estilos de conteúdo do post --- */
+    .post-individual .post-body h2 {
+        font-size: 28px;
+    }
+    .post-individual .post-body h3 {
+        font-size: 24px;
+    }
+    .post-individual .post-body h4 {
+        font-size: 20px;
+    }
+    .post-individual .post-body .lead-paragraph {
+        font-size: 19px;
+    }
+    .post-individual .post-body .article-table th, 
+    .post-individual .post-body .article-table td {
+        padding: 12px;
+    }
+    .post-individual .post-body blockquote {
+        padding: 15px 20px 15px 18px;
+    }
 }
 
+/* 12.2. CELULARES PEQUENOS */
 @media (max-width: 480px) {
     
     .container {
@@ -868,4 +893,193 @@ footer {
     .post-individual .post-body {
         font-size: 16px;
     }
+    
+    /* --- Estilos de conteúdo do post --- */
+    .post-individual .post-body h2 {
+        font-size: 26px;
+    }
+    .post-individual .post-body h3 {
+        font-size: 22px;
+    }
+    .post-individual .post-body .lead-paragraph {
+        font-size: 18px;
+    }
+    
+    .post-individual .post-body .article-table {
+        font-size: 15px; /* Reduz a fonte da tabela */
+    }
+    .post-individual .post-body .article-table th, 
+    .post-individual .post-body .article-table td {
+        padding: 10px; /* Menor preenchimento */
+    }
+    .post-individual .post-body blockquote {
+        font-size: 16px; /* Alinha com o corpo do texto */
+    }
+}
+
+
+/* =================================================== */
+/* 9.1. ESTILOS DE CONTEÚDO DO POST (Listas, Tabelas, etc.) */
+/* Adicionado para formatar o HTML injetado no post-body */
+/* =================================================== */
+
+/* Títulos e Subtítulos dentro do post */
+.post-individual .post-body h2 {
+    font-size: 32px; /* 1. H2 para subseções */
+    font-weight: 700;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.post-individual .post-body h3 {
+    font-size: 26px; /* 2. H3 (estilo já existia, mas padronizado) */
+    font-weight: 600;
+    margin-top: 45px;
+    margin-bottom: 15px;
+}
+
+.post-individual .post-body h4 {
+    font-size: 22px; /* 3. H4 (ex: "Tabela 1") */
+    font-weight: 600;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+/* Parágrafo de Destaque (Lead) */
+.post-individual .post-body .lead-paragraph {
+    font-size: 21px;
+    font-weight: 400;
+    color: var(--subtle-text);
+    margin-bottom: 35px;
+    line-height: 1.7;
+}
+
+/* Listas (UL e OL) */
+.post-individual .post-body ul,
+.post-individual .post-body ol {
+    margin-left: 20px;
+    margin-bottom: 30px;
+    padding-left: 15px;
+}
+
+.post-individual .post-body li {
+    margin-bottom: 12px;
+    line-height: 1.7;
+    padding-left: 5px;
+}
+
+.post-individual .post-body li::marker {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Estilo para a lista de recomendações (do seu exemplo) */
+.post-individual .post-body .content-list {
+    list-style-type: none; /* Remove o marcador padrão */
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.post-individual .post-body .content-list li {
+    position: relative;
+    padding-left: 30px; /* Espaço para o ícone */
+}
+
+.post-individual .post-body .content-list li::before {
+    content: '✓'; /* Ícone de check */
+    position: absolute;
+    left: 0;
+    top: 2px;
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 1.1em;
+}
+
+/* Estilização de Tabelas */
+.post-individual .post-body .table-container {
+    overflow-x: auto; /* Permite scroll horizontal em tabelas largas */
+    margin: 30px 0;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.post-individual .post-body .article-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+    text-align: left;
+}
+
+.post-individual .post-body .article-table th {
+    background-color: var(--border-color); /* Fundo do cabeçalho */
+    font-family: var(--font-heading);
+    font-weight: 600;
+    padding: 15px;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.post-individual .post-body .article-table td {
+    padding: 15px;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: top; /* Alinha o conteúdo no topo */
+}
+
+/* "Zebra-striping" sutil que funciona em ambos os modos */
+.post-individual .post-body .article-table tbody tr:nth-child(odd) {
+    background-color: var(--card-bg);
+}
+.post-individual .post-body .article-table tbody tr:nth-child(even) {
+    background-color: var(--bg-color);
+}
+
+.post-individual .post-body .article-table tbody tr:last-child td {
+    border-bottom: none; /* Remove a borda da última linha */
+}
+
+/* Outros Elementos de Conteúdo */
+
+/* Citação (Blockquote) */
+.post-individual .post-body blockquote {
+    margin: 30px 0;
+    padding: 20px 25px 20px 22px;
+    border-left: 5px solid var(--primary-color);
+    background-color: var(--bg-color); /* Usa o fundo principal para destacar */
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--subtle-text);
+}
+.post-individual .post-body blockquote p {
+    margin-bottom: 0;
+}
+
+/* Linha Horizontal (HR) */
+.post-individual .post-body hr {
+    border: 0;
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 50px auto;
+}
+
+/* Negrito (Strong) */
+.post-individual .post-body strong {
+    font-weight: 600;
+    color: var(--text-color); /* Garante contraste */
+}
+
+/* Rodapé do Post (do seu exemplo) */
+.post-individual .post-body .footnote {
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--border-color);
+    font-size: 14px;
+    color: var(--subtle-text);
+}
+.post-individual .post-body .footnote p {
+    font-size: 14px; /* Sobrescreve o p padrão */
+    margin-bottom: 5px;
 }
