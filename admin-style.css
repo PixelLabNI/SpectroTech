@@ -1,0 +1,370 @@
+/* 1. VARIÁVEIS DE COR E FONTES (BASEADO NO style.css) */
+:root {
+    --primary-color: #3B82F6; /* Um azul mais moderno */
+    --primary-hover: #2563EB;
+    
+    /* Modo Claro (Default) */
+    --bg-color: #f4f6f8; /* Fundo levemente mais escuro que branco puro */
+    --text-color: #212529;
+    --card-bg: #ffffff;
+    --header-bg: rgba(255, 255, 255, 0.9);
+    --border-color: #e9ecef; /* Borda mais clara */
+    --subtle-text: #6c757d; /* Texto secundário */
+    --logo-span: var(--primary-color);
+    
+    /* Cores de status (Adicionadas para a Dashboard) */
+    --success-color: #10B981; 
+    --danger-color: #EF4444; 
+    
+    /* Fontes */
+    --font-heading: 'Poppins', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    
+    --container-width: 1100px;
+    --border-radius: 8px;
+    --shadow: 0 5px 15px rgba(0, 0, 0, 0.1); 
+    --focus-ring: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+/* 2. BASE RESET E LAYOUT (Coeso) */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: var(--font-body);
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 20px;
+    padding-top: 30px; /* Mais espaço no topo do conteúdo */
+}
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+a:hover {
+    color: var(--primary-hover);
+}
+
+/* 3. HEADER E NAVEGAÇÃO (Coeso) */
+header {
+    background-color: var(--header-bg);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding: 15px 0;
+}
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.logo {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 800;
+}
+.logo a {
+    color: var(--text-color);
+}
+.logo span {
+    color: var(--logo-span);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-weight: 500;
+}
+#user-email {
+    color: var(--subtle-text);
+    font-size: 14px;
+}
+
+/* 4. ESTILOS DE BOTÕES E FORMULÁRIOS (Funcionais e Coesos) */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 15px;
+}
+.btn:hover:not(:disabled) {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+.btn-secondary {
+    background-color: var(--subtle-text);
+    color: white;
+}
+.btn-success {
+    background-color: var(--success-color);
+    color: white;
+}
+.btn-danger {
+    background-color: var(--danger-color);
+    color: white;
+}
+.btn-icon-only {
+    padding: 8px;
+    width: 40px;
+    height: 40px;
+}
+.btn-full-width {
+    width: 100%;
+}
+
+
+/* Estilo de Formulário Coeso */
+.form-group {
+    margin-bottom: 20px;
+}
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+.form-group input, 
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.form-group input:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: var(--focus-ring);
+}
+.error-message {
+    color: var(--danger-color);
+    margin-top: 15px;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* 5. ÁREA DE LOGIN (Foco na Ação) */
+.auth-box {
+    max-width: 450px;
+    margin: 80px auto;
+    padding: 40px;
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+.auth-box h2 {
+    font-family: var(--font-heading);
+    margin-bottom: 30px;
+    font-size: 30px;
+    color: var(--primary-color);
+}
+#login-form {
+    text-align: left;
+}
+
+
+/* 6. DASHBOARD PRINCIPAL (Clareza) */
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 15px;
+}
+.toolbar h2 {
+    font-family: var(--font-heading);
+    font-size: 32px;
+}
+
+/* Tabela de Posts (Usabilidade) */
+.posts-list-wrapper {
+    overflow-x: auto; /* Garante scroll em telas pequenas */
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+.posts-table {
+    min-width: 600px; /* Garante legibilidade em desktops */
+    width: 100%;
+    border-collapse: collapse;
+}
+.posts-table th, .posts-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+.posts-table th {
+    background-color: #e9f0f7; 
+    color: var(--text-color);
+    font-weight: 700;
+    font-size: 15px;
+    text-transform: uppercase;
+}
+.posts-table tr:hover {
+    background-color: #f7f7f7;
+    cursor: pointer;
+}
+.posts-table .date-col {
+    width: 180px;
+    font-size: 14px;
+    color: var(--subtle-text);
+}
+.posts-table .action-col {
+    width: 100px;
+    text-align: center;
+}
+
+/* 7. MODAL DE EDIÇÃO (Foco no Conteúdo) */
+.editor-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); 
+    z-index: 1000;
+    display: none; 
+    justify-content: center;
+    align-items: center;
+}
+
+.editor-content {
+    background: var(--card-bg);
+    padding: 40px;
+    border-radius: var(--border-radius);
+    max-width: 850px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transform: scale(0.95);
+    opacity: 0;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+}
+.editor-modal.active .editor-content {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.editor-content h3 {
+    font-family: var(--font-heading);
+    font-size: 32px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.editor-actions {
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+    margin-top: 30px;
+}
+.editor-actions .btn-danger {
+    margin-left: auto; 
+}
+
+/* 8. DARK MODE (Coesão) */
+body.dark-mode {
+    --bg-color: #1a1a1a;
+    --text-color: #f4f6f8;
+    --card-bg: #2b2b2b;
+    --header-bg: rgba(43, 43, 43, 0.9);
+    --border-color: #3f3f3f;
+    --subtle-text: #a0a0a0;
+
+    /* Dark mode table */
+    .posts-table th {
+        background-color: #3b3b3b;
+    }
+    .posts-table tr:hover {
+        background-color: #353535;
+    }
+    .form-group input, 
+    .form-group textarea {
+        border-color: #4f4f4f;
+    }
+}
+
+/* 9. RESPONSIVIDADE (Usabilidade Móvel) */
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .toolbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+    .toolbar h2 {
+        font-size: 24px;
+        text-align: center;
+    }
+    
+    /* Modo Card para Tabela */
+    .posts-table, .posts-table tbody, .posts-table tr, .posts-table td {
+        display: block;
+        width: 100%;
+    }
+    .posts-table thead {
+        display: none;
+    }
+    .posts-table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+    .posts-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        width: 50%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+    .posts-table .action-col {
+        text-align: center;
+        padding-left: 0;
+    }
+    .posts-table .action-col::before {
+        content: none;
+    }
+}

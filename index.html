@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpectroTech</title>
+    
+    <link rel="icon" type="image/png" href="favicon.png"> 
+    <meta name="description" content="Além da Notícia. Profundidade e Dicas no seu Mundo Digital.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <h1 class="logo"><a href="index.html">Spectro<span>Tech</span></a></h1>
+            
+            <button id="mobile-menu-toggle" aria-label="Abrir menu" aria-expanded="false">
+                <i data-feather="menu" class="icon-menu"></i>
+                <i data-feather="x" class="icon-close"></i>
+            </button>
+
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="index.html" class="active">Postagens</a></li>
+                    <li><a href="index.html#about">Sobre Nós</a></li>
+                    <li><a href="https://pixellabni.github.io/website/" target="_blank">Desenvolvedora</a></li>
+                </ul>
+                
+                <button id="theme-toggle" aria-label="Alternar modo claro/escuro">
+                    <i data-feather="moon" class="icon-moon"></i>
+                    <i data-feather="sun" class="icon-sun"></i>
+                    <span class="theme-toggle-text">Alternar Tema</span> 
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h2>Sua Visão 360º da Tecnologia</h2>
+            <p>SpectroTech: Além da Notícia. Profundidade e Dicas no seu Mundo Digital.</p>
+        </section>
+
+        <section class="blog-list">
+            <h3>Últimas Postagens</h3>
+
+            <div class="search-container">
+                <i data-feather="search" class="search-icon"></i>
+                <input type="search" id="search-input" placeholder="Buscar por título ou palavra-chave...">
+            </div>
+            <div id="posts-container" class="posts-grid">
+                
+                <div class="skeleton-card" aria-label="Carregando Conteúdo">
+                    <div class="skeleton-image"></div>
+                    <div class="skeleton-text"></div>
+                    <div class="skeleton-text short"></div>
+                </div>
+                <div class="skeleton-card" aria-label="Carregando Conteúdo">
+                    <div class="skeleton-image"></div>
+                    <div class="skeleton-text"></div>
+                    <div class="skeleton-text short"></div>
+                </div>
+                <div class="skeleton-card" aria-label="Carregando Conteúdo">
+                    <div class="skeleton-image"></div>
+                    <div class="skeleton-text"></div>
+                    <div class="skeleton-text short"></div>
+                </div>
+                
+            </div>
+        </section>
+        
+        <section id="about" class="about-section">
+            <h3>Sobre a SpectroTech</h3>
+            
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="logo.png" alt="Logo SpectroTech">
+                </div>
+                
+                <div class="about-text">
+                    <h4 class="about-mission">Nossa Missão: Além das Manchetes</h4>
+                    
+                    <p>A SpectroTech é o seu portal de referência para desvendar todo o espectro do universo tecnológico. Nossa missão é ir além das manchetes, oferecendo uma cobertura profunda e analítica.</p>
+                    
+                    <p style="margin-top: 15px; font-weight: 600;">Nossas principais editorias:</p>
+                    
+                    <ul class="about-topics post-tags"> <li class="tag">Sistemas Operacionais</li>
+                        <li class="tag">Desenvolvimento Web</li>
+                        <li class="tag">Hardware & Gadgets</li>
+                        <li class="tag">Segurança Digital</li>
+                    </ul>
+                    
+                    <a href="https://pixellabni.github.io/website/" target="_blank" class="cta-button">Desenvolvido por Pixel Lab NI</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-social">
+            <a href="https://www.youtube.com/@pixellabni" target="_blank" aria-label="Canal no YouTube"><i data-feather="youtube"></i></a>
+            <a href="https://github.com/PixelLabNI" target="_blank" aria-label="Perfil no GitHun"><i data-feather="github"></i></a>
+            <a href="https://www.instagram.com/pixellabni/" target="_blank" aria-label="Perfil no Instagram"><i data-feather="instagram"></i></a>
+        </div>
+        <p>SpectroTech | <a href="https://pixellabni.github.io/website/">Pixel Lab NI</a></p>
+    </footer>
+
+    <button id="back-to-top" aria-label="Voltar ao topo">
+        <i data-feather="arrow-up"></i>
+    </button>
+
+    <script>
+      feather.replace()
+    </script>
+    
+    <script type="module" src="app.js"></script>
+
+</body>
+</html>

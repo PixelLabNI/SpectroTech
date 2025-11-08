@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | SpectroTech</title>
+    
+    <link rel="icon" type="image/png" href="favicon.png"> 
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <link rel="stylesheet" href="admin-style.css"> 
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <h1 class="logo"><a href="admin.html">SpectroTech<span> Dashboard</span></a></h1>
+            <div id="auth-info" class="user-info" style="display: none;">
+                <span id="user-email"></span>
+                <button id="logout-btn" class="btn btn-secondary btn-icon-only" aria-label="Sair">
+                    <i data-feather="log-out"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <section id="login-section" class="auth-box">
+            <h2>Acesso Restrito</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha:</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full-width">Entrar</button>
+                <p id="login-error" class="error-message"></p>
+            </form>
+        </section>
+
+        <section id="dashboard-section" style="display: none;">
+            
+            <div class="toolbar">
+                <h2>Gerenciamento de Conteúdo</h2>
+                <button id="new-post-btn" class="btn btn-success">
+                    <i data-feather="plus-circle"></i> Novo Post
+                </button>
+            </div>
+
+            <div id="posts-list" class="posts-list-wrapper">
+                </div>
+
+            <aside id="post-editor" class="editor-modal">
+                <div class="editor-content">
+                    <h3><span id="editor-title">Adicionar Novo Post</span></h3>
+                    <form id="post-form">
+                        <input type="hidden" id="post-id-hidden">
+                        
+                        <div class="form-group">
+                            <label for="post-title">Título:</label>
+                            <input type="text" id="post-title" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="post-snippet">Descrição Curta (Snippet):</label>
+                            <input type="text" id="post-snippet" required maxlength="150">
+                            <small>Máximo 150 caracteres para exibição na lista do blog.</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="post-content">Conteúdo (HTML):</label>
+                            <textarea id="post-content" rows="15" required placeholder="Use tags HTML (p, h3, ul, ol) para formatar o texto."></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="post-thumbnail">URL da Imagem (Thumbnail):</label>
+                            <input type="url" id="post-thumbnail" placeholder="Ex: https://dominio.com/imagem.jpg">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="post-youtube">URL do Embed do YouTube:</label>
+                            <input type="url" id="post-youtube" placeholder="Ex: https://www.youtube.com/embed/XXXXXX">
+                        </div>
+
+                        <div class="editor-actions">
+                            <button type="submit" class="btn btn-primary" id="save-post-btn">Salvar Post</button>
+                            <button type="button" class="btn btn-secondary" id="cancel-edit-btn">Cancelar</button>
+                            <button type="button" class="btn btn-danger" id="delete-post-btn" style="display: none;">
+                                <i data-feather="trash-2"></i> Excluir
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </aside>
+            
+        </section>
+
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    
+    <script type="module" src="app.js"></script> 
+    <script type="module" src="admin.js"></script> <script>
+        feather.replace()
+    </script>
+</body>
+</html>
