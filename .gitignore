@@ -1,0 +1,34 @@
+# Arquivos gerados por Sistemas Operacionais
+#############################
+.DS_Store
+Thumbs.db
+
+# Diretórios e Configurações de IDEs (Editores de Código)
+#############################
+.vscode/        # Configurações do Visual Studio Code
+.idea/          # Configurações do JetBrains (WebStorm, etc.)
+*.iml           # Arquivos de módulo do JetBrains
+*.sublime-* # Arquivos do Sublime Text
+*.swp           # Arquivos de swap do Vim
+
+# Logs, Cache e Arquivos Temporários
+#############################
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log
+*.log
+*.tmp
+temp/
+/dist/          # Se for usar um processo de build (WebPack, Rollup, etc.)
+
+# Variáveis de Ambiente e Chaves Secretas
+#############################
+# Este projeto não usa um arquivo .env, mas é uma boa prática
+# deixar a regra aqui para o futuro.
+.env
+.env.local
+config.local.js # Se você criar um arquivo JS para chaves secretas
+
+# Arquivos de Módulos (Se fosse um projeto Node.js)
+#############################
+# node_modules/
