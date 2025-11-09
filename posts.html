@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carregando post... | SpectroTech</title>
+    <title>Todos os Posts | SpectroTech</title>
     
     <link rel="icon" type="image/png" href="favicon.png"> 
-    
+    <meta name="description" content="Além da Notícia. Profundidade e Dicas no seu Mundo Digital.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
     <script src="https://unpkg.com/feather-icons"></script>
 
     <link rel="stylesheet" href="style.css">
-        
+    <link rel="stylesheet" href="posts.css">
 </head>
 <body>
 
@@ -29,40 +29,34 @@
 
             <nav id="main-nav">
                 <ul>
-                    <li><a href="index.html">Postagens</a></li>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="posts.html" class="active">Todos os Posts</a></li>
                     <li><a href="index.html#about">Sobre Nós</a></li>
-                    <li><a href="https://pixellabni.github.io/website/" target="_blank">Desenvolvedora</a></li>
                 </ul>
                 
                 <button id="theme-toggle" aria-label="Alternar modo claro/escuro">
                     <i data-feather="moon" class="icon-moon"></i>
                     <i data-feather="sun" class="icon-sun"></i>
-                    <span class="theme-toggle-text">Alternar Tema</span>
+                    <span class="theme-toggle-text">Alternar Tema</span> 
                 </button>
             </nav>
         </div>
     </header>
 
     <main class="container">
-        <a href="#" id="back-button" class="back-link">
-            <i data-feather="arrow-left"></i> Voltar a Pagina Anterior 
-        </a>
-        
-        <article id="post-content" class="post-individual" aria-busy="true" aria-live="polite">
-            <div id="post-loader">
-                <div class="skeleton-text large" style="width: 70%; height: 42px; margin: 0 auto 20px auto;"></div>
-                <div class="skeleton-text short" style="width: 40%; height: 16px; margin: 0 auto 40px auto; opacity: 0.5;"></div>
-                
-                <div class="skeleton-text" style="width: 90%; margin-bottom: 20px;"></div>
-                <div class="skeleton-text" style="width: 100%; margin-bottom: 20px;"></div>
-                <div class="skeleton-text" style="width: 95%; margin-bottom: 20px;"></div>
-                <div class="skeleton-text" style="width: 80%; margin-bottom: 20px;"></div>
+        <section class="main-posts posts-full-list" id="posts">
+            <h2>Todas as Postagens</h2>
+
+            <div class="search-container">
+                <i data-feather="search" class="search-icon"></i>
+                <input type="search" id="search-input" placeholder="Buscar por título ou palavra-chave...">
             </div>
             
-            <h2 id="post-title-placeholder" style="display: none;"></h2>
-            <div id="post-body-placeholder" style="display: none;"></div>
-        </article>
-    </main>
+            <div id="posts-container" data-homepage="false">
+                </div>
+        </section>
+        
+        </main>
 
     <footer>
         <div class="footer-social">
@@ -80,8 +74,6 @@
     <script>
       feather.replace()
     </script>
-    
-    <script type="module" src="app.js"></script>
-    
+    <script type="module" src="app.js"></script> 
 </body>
 </html>

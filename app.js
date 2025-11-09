@@ -12,7 +12,6 @@ import {
     query, 
     orderBy 
 } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
-// NOVO: Importação para Auth
 import { getAuth } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
 
@@ -27,7 +26,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-// NOVO: Inicializa o serviço de Auth
 const auth = getAuth(app); 
 
 console.log("Firebase App e Firestore (v9) inicializados.");
@@ -112,7 +110,6 @@ if (menuToggle && mainNav) {
             const href = link.getAttribute('href');
             
             // Verifica se é um link de âncora NA MESMA PÁGINA
-            // (começa com # OU é 'index.html#' e estamos em index.html)
             const isSamePageAnchor = (
                 href.startsWith('#') || 
                 (href.startsWith('index.html#') && (window.location.pathname.endsWith('index.html') || window.location.pathname === '/'))
@@ -120,10 +117,9 @@ if (menuToggle && mainNav) {
 
 
             if (isSamePageAnchor) {
-                e.preventDefault(); // Previne o pulo imediato
-                closeMenu();        // Fecha o menu
+                e.preventDefault(); 
+                closeMenu();        
 
-                // Espera a animação de 300ms do menu e depois rola suave
                 setTimeout(() => {
                     const targetId = href.split('#')[1];
                     if (targetId) {
@@ -132,10 +128,8 @@ if (menuToggle && mainNav) {
                             targetElement.scrollIntoView({ behavior: 'smooth' });
                         }
                     }
-                }, 300); // Deve ser igual ao tempo de transição do CSS
+                }, 300); 
             } else {
-                // Para links externos (YouTube) ou outras páginas (post.html)
-                // Apenas fecha o menu e deixa o navegador seguir o link
                 closeMenu();
             }
         });
@@ -227,11 +221,14 @@ function handleSearch(event) {
 
 
 // ===================================
-// 4.2 RENDERIZADOR DE POSTS (COM OTIMIZAÇÃO DE DOM)
+// 4.2 RENDERIZADOR DE POSTS (COM OTIMIZAÇÃO DE DOM E LÓGICA DE LIMITE)
 // ===================================
 function displayPosts(posts) {
     const postsContainer = document.getElementById('posts-container');
     if (!postsContainer) return;
+
+    // NOVO: Verifica se deve aplicar o limite (apenas se data-homepage="true")
+    const isHomePage = postsContainer.getAttribute('data-homepage') === 'true';
 
     const fragment = document.createDocumentFragment();
     postsContainer.innerHTML = '';
@@ -241,7 +238,7 @@ function displayPosts(posts) {
         return;
     }
 
-    posts.forEach(postDoc => {
+    posts.forEach((postDoc, i) => { 
         const post = postDoc.data; 
         const postId = postDoc.id; 
 
@@ -260,6 +257,18 @@ function displayPosts(posts) {
 
         const postCard = document.createElement('article');
         postCard.classList.add('post-card');
+
+        // Lógica de Classes para Limitação de Posts (SÓ SE FOR PÁGINA INICIAL)
+        if (isHomePage) {
+            // Mobile: Esconde a partir do 2º post (i=1).
+            if (i >= 1) {
+                postCard.classList.add('mobile-hidden-post');
+            }
+            // Desktop: Esconde a partir do 4º post (i=3).
+            if (i >= 3) {
+                postCard.classList.add('desktop-hidden-post');
+            }
+        }
 
         postCard.innerHTML = `
             <a href="post.html?id=${postId}" aria-label="Ler o post ${post.title}">
@@ -322,6 +331,7 @@ async function fetchBlogPosts() {
 // 6. FUNÇÃO PARA A PÁGINA DE POST (post.html)
 // ===================================
 async function fetchSinglePost() {
+    // ... (restante da lógica do fetchSinglePost, não alterada)
     const postContent = document.getElementById('post-content');
     const postLoader = document.getElementById('post-loader'); 
 
@@ -412,6 +422,16 @@ async function fetchSinglePost() {
         console.error("Erro ao buscar o post:", error);
         postContent.innerHTML = '<h2 style="text-align: center; padding: 40px 0;">Erro</h2><p style="text-align: center;">Ocorreu um erro ao carregar o post. Tente novamente.</p>';
     }
+}
+
+// --- Lógica para o botão "Voltar" na post.html ---
+const backButton = document.getElementById('back-button');
+
+if (backButton) {
+    backButton.addEventListener('click', (e) => {
+        e.preventDefault(); // Impede a ação padrão do link (ir para #)
+        window.history.back(); // Volta para a página anterior
+    });
 }
 
 // NOVO: Exporta as variáveis para serem usadas pelo admin.js

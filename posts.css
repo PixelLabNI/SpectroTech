@@ -1,0 +1,52 @@
+/* =================================== */
+/* POSTS.CSS - Estilos Específicos para a Página 'Todos os Posts' (posts.html) */
+/* =================================== */
+
+/* 1. AJUSTE GERAL DO ESPAÇAMENTO */
+.posts-full-list {
+    /* Aumenta o padding inferior para um visual mais limpo antes do rodapé. */
+    padding-bottom: 100px; 
+}
+
+/* 2. ESPAÇAMENTO DA BUSCA E TÍTULO */
+.posts-full-list h2 {
+    margin-top: 20px; 
+    margin-bottom: 40px; 
+}
+
+.posts-full-list .search-bar {
+    margin-bottom: 40px; 
+    width: 100%;
+}
+
+/* =================================== */
+/* 3. MELHORIA DA RESPONSIVIDADE (GRADE DE POSTS) */
+/* =================================== */
+
+/* MOBILE (Padrão: 1 coluna - Aplicamos o GAP aqui) */
+.posts-full-list #posts-container {
+    /* Define o layout de grade para todos os tamanhos, permitindo o uso de 'gap' */
+    display: grid; 
+    /* Garante 1 coluna no mobile (mesmo que já seja o comportamento padrão, torna explícito) */
+    grid-template-columns: 1fr; 
+    /* ESTA É A MUDANÇA ESSENCIAL: Adiciona espaçamento vertical e horizontal */
+    gap: 25px; 
+}
+
+
+/* TABLET (min-width: 768px - 2 colunas) */
+@media (min-width: 768px) {
+    .posts-full-list #posts-container {
+        /* Define 2 colunas para tablets */
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 30px; 
+    }
+}
+
+/* DESKTOP (min-width: 992px - 3 colunas) */
+@media (min-width: 992px) {
+    .posts-full-list #posts-container {
+        /* Define 3 colunas para desktop */
+        grid-template-columns: repeat(3, 1fr); 
+    }
+}

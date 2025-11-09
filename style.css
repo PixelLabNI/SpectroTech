@@ -1083,3 +1083,27 @@ footer {
     font-size: 14px; /* Sobrescreve o p padrão */
     margin-bottom: 5px;
 }
+
+/* =================================== */
+/* 13. CONTROLE DE VISIBILIDADE DE POSTS (HOME) */
+/* =================================== */
+
+/* Mobile (Padrão: Apenas o primeiro post é visível) */
+/* Esconde a partir do 2º post (i >= 1) */
+.mobile-hidden-post {
+    display: none !important;
+}
+
+/* Desktop (min-width: 768px - Visíveis: 1º, 2º e 3º posts) */
+@media (min-width: 768px) {
+    /* Reexibe o 2º e 3º posts, que tem apenas a classe .mobile-hidden-post */
+    /* ATENÇÃO: Ajuste 'flex' para o display original do seu .post-card (ex: block, grid) se o layout quebrar. */
+    .mobile-hidden-post:not(.desktop-hidden-post) {
+        display: flex !important; 
+    }
+
+    /* Mantém escondido a partir do 4º post (i >= 3) */
+    .desktop-hidden-post {
+        display: none !important;
+    }
+}
