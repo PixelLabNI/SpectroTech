@@ -10,7 +10,8 @@ import {
     getDoc, 
     doc, 
     query, 
-    orderBy 
+    orderBy,
+    limit 
 } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
@@ -208,6 +209,7 @@ function formatDate(timestamp, style = 'long') {
 function handleSearch(event) {
     const searchTerm = event.target.value.toLowerCase().trim();
     
+    // Filtra no array 'allPosts' completo 
     const filteredPosts = allPosts.filter(post => {
         const title = post.data.title.toLowerCase();
         const snippet = post.data.snippet.toLowerCase();
@@ -227,8 +229,8 @@ function displayPosts(posts) {
     const postsContainer = document.getElementById('posts-container');
     if (!postsContainer) return;
 
-    // NOVO: Verifica se deve aplicar o limite (apenas se data-homepage="true")
-    const isHomePage = postsContainer.getAttribute('data-homepage') === 'true';
+    // Detecta se é a página inicial
+    const isHomePage = postsContainer.getAttribute('data-homepage') === 'true'; 
 
     const fragment = document.createDocumentFragment();
     postsContainer.innerHTML = '';
@@ -238,7 +240,12 @@ function displayPosts(posts) {
         return;
     }
 
-    posts.forEach((postDoc, i) => { 
+    // ✅ GARANTIA DE RENDERIZAÇÃO: Aplica slice(0, 3) APENAS na Home
+    // Isso limita a renderização mesmo que a query do Firestore tenha sido burlada 
+    // (o que não deve acontecer, mas é uma camada de segurança)
+    const postsToDisplay = isHomePage ? posts.slice(0, 3) : posts; 
+
+    postsToDisplay.forEach((postDoc, i) => { 
         const post = postDoc.data; 
         const postId = postDoc.id; 
 
@@ -257,18 +264,6 @@ function displayPosts(posts) {
 
         const postCard = document.createElement('article');
         postCard.classList.add('post-card');
-
-        // Lógica de Classes para Limitação de Posts (SÓ SE FOR PÁGINA INICIAL)
-        if (isHomePage) {
-            // Mobile: Esconde a partir do 2º post (i=1).
-            if (i >= 1) {
-                postCard.classList.add('mobile-hidden-post');
-            }
-            // Desktop: Esconde a partir do 4º post (i=3).
-            if (i >= 3) {
-                postCard.classList.add('desktop-hidden-post');
-            }
-        }
 
         postCard.innerHTML = `
             <a href="post.html?id=${postId}" aria-label="Ler o post ${post.title}">
@@ -303,10 +298,23 @@ async function fetchBlogPosts() {
     const postsContainer = document.getElementById('posts-container');
     if (!postsContainer) return;
 
+    // Detecta se é a página inicial (baseado no atributo em index.html)
+    const isHomePage = postsContainer.getAttribute('data-homepage') === 'true';
+
     try {
         const postsCollection = collection(db, 'posts');
-        const q = query(postsCollection, orderBy('timestamp', 'desc'));
-        const snapshot = await getDocs(q);
+        
+        let q; 
+        
+        if (isHomePage) {
+            // ✅ CORREÇÃO APLICADA: Limita a consulta a 3 posts na Home
+            q = query(postsCollection, orderBy('timestamp', 'desc'), limit(3)); 
+        } else {
+            // Em outras páginas (como posts.html), busca todos
+            q = query(postsCollection, orderBy('timestamp', 'desc'));
+        }
+
+        const snapshot = await getDocs(q); 
 
         if (snapshot.empty) {
             postsContainer.innerHTML = '<p style="text-align: center; padding: 40px 0;">Ainda não há tutoriais por aqui. Volte em breve!</p>';
@@ -318,7 +326,7 @@ async function fetchBlogPosts() {
             data: doc.data()
         }));
 
-        displayPosts(allPosts);
+        displayPosts(allPosts); // 'allPosts' agora tem no máximo 3 itens na Home
 
     } catch (error) {
         console.error("Erro ao buscar posts:", error);
@@ -331,7 +339,6 @@ async function fetchBlogPosts() {
 // 6. FUNÇÃO PARA A PÁGINA DE POST (post.html)
 // ===================================
 async function fetchSinglePost() {
-    // ... (restante da lógica do fetchSinglePost, não alterada)
     const postContent = document.getElementById('post-content');
     const postLoader = document.getElementById('post-loader'); 
 
@@ -400,7 +407,7 @@ async function fetchSinglePost() {
 
             postHTML += `
                 <div class="post-footer-cta">
-                    <p>Gostou? <a href="index.html">Veja mais posts</a> ou</p>
+                    <p>Gostou? <a href="posts.html">Veja mais posts</a> ou</p>
                     <a href="https://github.com/PixelLabNI/SpectroTech" target="_blank" class="cta-button">Saiba Sobre a SpectroTech</a>
                 </div>
             `;
@@ -429,8 +436,8 @@ const backButton = document.getElementById('back-button');
 
 if (backButton) {
     backButton.addEventListener('click', (e) => {
-        e.preventDefault(); // Impede a ação padrão do link (ir para #)
-        window.history.back(); // Volta para a página anterior
+        e.preventDefault(); 
+        window.history.back(); 
     });
 }
 

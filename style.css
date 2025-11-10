@@ -377,6 +377,13 @@ body.dark-mode .post-card-image.placeholder {
     pointer-events: none; 
 }
 
+/* ✅ NOVO: Estilo para o botão "Ver Todas as Postagens" */
+.view-all-posts {
+    text-align: center;
+    margin: 40px 0 60px 0; 
+}
+
+
 /* 8. SKELETON LOADER (UX) */
 .skeleton-card {
     background: var(--card-bg);
@@ -764,6 +771,11 @@ footer {
 
     .blog-list h3 {
         font-size: 28px;
+    }
+    
+    /* ✅ NOVO: Estilo responsivo para o botão "Ver Todas as Postagens" */
+    .view-all-posts {
+        margin: 30px 0 50px 0;
     }
 
     .posts-grid {
