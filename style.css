@@ -9,10 +9,10 @@ html {
     --primary-hover: #2563EB;
     
     /* Modo Claro (Default) */
-    --bg-color: #f4f6f8;
+    --bg-color: #ffffff; /* ALTERADO: Mais limpo e focado */
     --text-color: #212529;
-    --card-bg: #ffffff;
-    --header-bg: rgba(255, 255, 255, 0.9);
+    --card-bg: #f8f9fa; /* ALTERADO: Contraste suave com o fundo */
+    --header-bg: rgba(255, 255, 255, 0.95); /* Levemente menos transparente */
     --border-color: #e9ecef;
     --subtle-text: #6c757d;
     --logo-span: var(--primary-color);
@@ -31,15 +31,15 @@ html {
 
 /* 2. DARK MODE */
 body.dark-mode {
-    --bg-color: #0d0d0d;
+    --bg-color: #0f0f0f; /* ALTERADO: Preto um pouco mais suave */
     --text-color: #e9ecef;
-    --card-bg: #1e1e1e;
-    --header-bg: rgba(30, 30, 30, 0.9);
+    --card-bg: #1c1c1c; /* ALTERADO: Maior distinção do fundo */
+    --header-bg: rgba(28, 28, 28, 0.95);
     --border-color: #343a40;
     --subtle-text: #adb5bd;
     --logo-span: #f8f9fa;
-    --shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    --shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.4);
+    --shadow: 0 6px 18px rgba(0, 0, 0, 0.5); /* ALTERADO: Sombra mais forte no dark mode */
+    --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.6);
 }
 
 
@@ -127,8 +127,8 @@ header.scrolled {
 
 .logo a {
     font-family: var(--font-heading);
-    font-size: 28px;
-    font-weight: 700;
+    font-size: 30px; /* ALTERADO */
+    font-weight: 800; /* ALTERADO */
     color: var(--text-color);
     text-decoration: none;
 }
@@ -217,30 +217,31 @@ body.dark-mode .icon-moon { display: none; }
     background-color: var(--card-bg);
     margin: 30px 0 50px 0; 
     border-radius: var(--border-radius);
-    border: 1px solid var(--border-color);
+    border: none; /* ALTERADO: Remove a borda */
     box-shadow: var(--shadow); 
     transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .hero h2 {
     font-family: var(--font-heading);
-    font-size: 48px; 
-    margin-bottom: 15px;
-    font-weight: 700;
+    font-size: 52px; /* ALTERADO: Maior impacto */
+    margin-bottom: 20px;
+    font-weight: 800; /* ALTERADO: Mais negrito */
 }
 .hero p {
     font-size: 20px;
     color: var(--subtle-text);
-    max-width: 600px;
+    max-width: 650px; /* Levemente mais largo */
     margin: 0 auto;
 }
 
 /* 7. LISTA DE POSTS E CARDS */
 .blog-list h3 {
     font-family: var(--font-heading);
-    font-size: 32px; 
+    font-size: 36px; /* ALTERADO */
+    font-weight: 700; /* ALTERADO */
     margin-bottom: 30px;
     
-    border-bottom: 2px solid var(--border-color);
+    border-bottom: 2px solid var(--primary-color); /* ALTERADO: Destaque primário */
     padding-bottom: 15px;
     transition: border-color 0.3s ease;
 }
@@ -256,14 +257,15 @@ body.dark-mode .icon-moon { display: none; }
     border-radius: var(--border-radius);
     overflow: hidden;
     box-shadow: var(--shadow);
-    border: none; 
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    border: 1px solid var(--border-color); /* ALTERADO: Borda sutil */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
     display: flex;
     flex-direction: column;
 }
 .post-card:hover {
-    transform: translateY(-7px); 
+    transform: translateY(-5px); /* ALTERADO */
     box-shadow: var(--shadow-hover);
+    border: 1px solid var(--primary-color); /* ALTERADO: Borda de destaque no hover */
 }
 
 .post-card-image {
@@ -332,10 +334,10 @@ body.dark-mode .post-card-image.placeholder {
 .tag {
     background-color: var(--border-color);
     color: var(--subtle-text);
-    font-size: 12px;
+    font-size: 13px; /* ALTERADO */
     font-weight: 600;
-    padding: 4px 10px;
-    border-radius: 20px;
+    padding: 5px 12px; /* ALTERADO */
+    border-radius: 5px; /* ALTERADO */
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -763,14 +765,14 @@ footer {
         margin: 20px 0 40px 0;
     }
     .hero h2 {
-        font-size: 38px;
+        font-size: 42px; /* ALTERADO */
     }
     .hero p {
         font-size: 18px;
     }
 
     .blog-list h3 {
-        font-size: 28px;
+        font-size: 30px; /* ALTERADO */
     }
     
     /* ✅ NOVO: Estilo responsivo para o botão "Ver Todas as Postagens" */
