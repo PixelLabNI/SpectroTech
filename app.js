@@ -11,7 +11,8 @@ import {
     doc, 
     query, 
     orderBy,
-    limit 
+    limit,
+    where // IMPORTADO: Necessário para filtrar o status de publicação
 } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
@@ -242,7 +243,6 @@ function displayPosts(posts) {
 
     // ✅ GARANTIA DE RENDERIZAÇÃO: Aplica slice(0, 3) APENAS na Home
     // Isso limita a renderização mesmo que a query do Firestore tenha sido burlada 
-    // (o que não deve acontecer, mas é uma camada de segurança)
     const postsToDisplay = isHomePage ? posts.slice(0, 3) : posts; 
 
     postsToDisplay.forEach((postDoc, i) => { 
@@ -306,12 +306,15 @@ async function fetchBlogPosts() {
         
         let q; 
         
+        // NOVO: Adiciona a condição de filtro 'published == true' à consulta base
+        const baseQuery = [where('published', '==', true), orderBy('timestamp', 'desc')];
+        
         if (isHomePage) {
-            // ✅ CORREÇÃO APLICADA: Limita a consulta a 3 posts na Home
-            q = query(postsCollection, orderBy('timestamp', 'desc'), limit(3)); 
+            // ✅ FILTRO APLICADO: Filtra por publicado E limita a 3 posts na Home
+            q = query(postsCollection, ...baseQuery, limit(3)); 
         } else {
-            // Em outras páginas (como posts.html), busca todos
-            q = query(postsCollection, orderBy('timestamp', 'desc'));
+            // Em outras páginas (como posts.html), busca todos publicados
+            q = query(postsCollection, ...baseQuery);
         }
 
         const snapshot = await getDocs(q); 
@@ -358,6 +361,15 @@ async function fetchSinglePost() {
 
         if (docSnap.exists()) {
             const post = docSnap.data(); 
+
+            // NOVO: Verifica se o post está explicitamente desativado (published: false)
+            if (post.published === false) {
+                 postContent.setAttribute('aria-busy', 'false');
+                 console.error("Post não publicado:", postId);
+                 postContent.innerHTML = '<h2 style="text-align: center; padding: 40px 0;">Post não encontrado</h2><p style="text-align: center;">Não foi possível encontrar este tutorial. <a href="index.html">Voltar ao início</a>.</p>';
+                 return; // Sai da função se for rascunho
+            }
+            
             document.title = `${post.title} | SMarqueza Digital`;
 
             if (postLoader) postLoader.remove();

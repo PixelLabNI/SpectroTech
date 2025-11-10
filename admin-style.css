@@ -174,6 +174,24 @@ header {
     font-weight: 600;
 }
 
+/* NOVO: Estilo para o campo de checkbox de publicação */
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+.checkbox-group input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+}
+.checkbox-group label {
+    display: inline;
+    margin-left: 10px;
+    margin-bottom: 0;
+}
+
+
 /* 5. ÁREA DE LOGIN (Foco na Ação) */
 .auth-box {
     max-width: 450px;
@@ -217,7 +235,7 @@ header {
     box-shadow: var(--shadow);
 }
 .posts-table {
-    min-width: 600px; /* Garante legibilidade em desktops */
+    min-width: 700px; /* Aumenta a largura mínima para acomodar a nova coluna */
     width: 100%;
     border-collapse: collapse;
 }
@@ -238,7 +256,7 @@ header {
     cursor: pointer;
 }
 .posts-table .date-col {
-    width: 180px;
+    width: 150px; /* Ajuste para nova coluna */
     font-size: 14px;
     color: var(--subtle-text);
 }
@@ -380,6 +398,9 @@ body.dark-mode {
     }
     .posts-table .action-col::before {
         content: none;
+    }
+    .posts-table .date-col {
+        width: 100%; /* Garante que em mobile o campo data funcione como card */
     }
     
     /* NOVO: Exibir alerta no mobile */

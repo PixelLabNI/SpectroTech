@@ -49,6 +49,9 @@ const logoutBtn = document.getElementById('logout-btn');
 const userEmailSpan = document.getElementById('user-email');
 const editorTitle = document.getElementById('editor-title');
 
+// NOVO: Referência ao campo de Publicação
+const postPublishedCheckbox = document.getElementById('post-published');
+
 // Alerta Global
 const globalAlert = document.getElementById('global-alert');
 
@@ -159,6 +162,9 @@ function openEditor(postData = null, postId = null) {
     
     postForm.reset(); 
     
+    // NOVO: Define o padrão como publicado (true) para novos posts
+    let isPublished = true;
+
     if (postId && postData) {
         editorTitle.textContent = 'Editar Post';
         document.getElementById('post-id-hidden').value = postId;
@@ -168,6 +174,9 @@ function openEditor(postData = null, postId = null) {
         document.getElementById('post-thumbnail').value = postData.thumbnail || null;
         document.getElementById('post-youtube').value = postData.youtubeUrl || null;
         
+        // NOVO: Carrega o status de publicação. Padrão é 'true' se o campo não existir
+        isPublished = postData.published === false ? false : true; 
+        
         deletePostBtn.style.display = 'inline-flex'; 
     } else {
         editorTitle.textContent = 'Adicionar Novo Post';
@@ -175,6 +184,11 @@ function openEditor(postData = null, postId = null) {
         deletePostBtn.style.display = 'none'; 
     }
     
+    // NOVO: Aplica o status no checkbox
+    if (postPublishedCheckbox) {
+        postPublishedCheckbox.checked = isPublished;
+    }
+
     postEditor.style.display = 'flex';
     setTimeout(() => postEditor.classList.add('active'), 10); 
 }
@@ -209,7 +223,6 @@ async function fetchAdminPosts() {
     postsList.innerHTML = '<p style="text-align: center; padding: 40px 0;">Carregando posts...</p>';
 
     try {
-        // ... (resto da função fetchAdminPosts sem alteração, a lógica de bloqueio está na updateUI)
         const postsQuery = query(postsCollectionRef, orderBy('timestamp', 'desc'));
         const snapshot = await getDocs(postsQuery);
 
@@ -223,6 +236,7 @@ async function fetchAdminPosts() {
                 <thead>
                     <tr>
                         <th>Título</th>
+                        <th>Status</th>
                         <th class="date-col">Data</th>
                         <th class="action-col">Ação</th>
                     </tr>
@@ -236,9 +250,16 @@ async function fetchAdminPosts() {
                             ? formatDate(post.timestamp, 'short') 
                             : (post.timestamp ? new Date(post.timestamp.toDate()).toLocaleDateString() : 'Sem Data');
             
+            // NOVO: Determina o status para exibição
+            const isPublished = post.published === false ? false : true;
+            const statusText = isPublished 
+                                ? '<span style="color: var(--success-color); font-weight: 600;">Publicado</span>' 
+                                : '<span style="color: var(--danger-color); font-weight: 600;">Rascunho</span>';
+            
             tableHTML += `
                 <tr data-id="${doc.id}">
                     <td data-label="Título">${post.title}</td>
+                    <td data-label="Status">${statusText}</td>
                     <td data-label="Data" class="date-col">${dateStr}</td>
                     <td data-label="Ação" class="action-col">
                         <button class="btn btn-primary btn-edit btn-icon-only" data-id="${doc.id}" aria-label="Editar ${post.title}">
@@ -307,6 +328,8 @@ if (postForm) {
             content: document.getElementById('post-content').value,
             thumbnail: document.getElementById('post-thumbnail').value || null,
             youtubeUrl: document.getElementById('post-youtube').value || null,
+            // NOVO: Inclui o status de publicação
+            published: postPublishedCheckbox ? postPublishedCheckbox.checked : true, 
             // CORREÇÃO: Usa a função serverTimestamp() modular, importada no topo do arquivo.
             timestamp: serverTimestamp()
         };
