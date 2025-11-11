@@ -109,8 +109,9 @@ header {
     position: sticky;
     top: 0;
     z-index: 100;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    /* === CORREÇÃO 1: Linhas removidas === */
+    /* backdrop-filter: blur(8px); */
+    /* -webkit-backdrop-filter: blur(8px); */
     transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -741,7 +742,7 @@ footer {
         left: 0; /* Alinhado à esquerda */
         width: 320px; /* Largura fixa */
         max-width: 90%; /* Limite em telas muito pequenas */
-        height: calc(100vh - 70px);
+        bottom: 0; /* Substitui o 'height' para ajuste correto em viewports mobile */
         background-color: var(--bg-color);
         border-top: 1px solid var(--border-color);
         border-right: 1px solid var(--border-color); /* Borda na direita */
@@ -756,6 +757,9 @@ footer {
         flex-direction: column;
         justify-content: space-between; /* Empurra o botão de tema para baixo */
         box-shadow: 5px 0 15px rgba(0,0,0,0.1); /* Sombra na direita */
+
+        /* === CORREÇÃO 2: Linha Adicionada === */
+        z-index: 101; /* Garante que o menu fique SOBRE o header (z-index: 100) */
     }
     
     body.dark-mode #main-nav {
