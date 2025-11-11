@@ -128,7 +128,12 @@ header.scrolled {
 
 h1.logo {
     margin: 0;
-    line-height: 1; /* Faz a altura do H1 se ajustar ao texto */
+    line-height: 1; 
+    
+    /* NOVAS REGRAS PARA ALINHAR AO BOTÃO */
+    height: 34px; /* 1. Força a altura para ser igual ao botão */
+    display: flex;  /* 2. Permite centralizar o link 'a' */
+    align-items: center; /* 3. Centraliza o link 'a' verticalmente */
 }
 
 .logo a {
