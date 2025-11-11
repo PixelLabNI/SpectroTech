@@ -81,6 +81,7 @@ if (header) {
 // --- Lógica do Menu Mobile ---
 const menuToggle = document.getElementById('mobile-menu-toggle');
 const mainNav = document.getElementById('main-nav');
+const menuOverlay = document.querySelector('.menu-overlay'); // ADICIONADO
 
 if (menuToggle && mainNav) {
     // Evento para abrir/fechar o menu
@@ -89,6 +90,7 @@ if (menuToggle && mainNav) {
         menuToggle.classList.toggle('active');
         menuToggle.setAttribute('aria-expanded', isActive);
         body.classList.toggle('no-scroll', isActive); 
+        if (menuOverlay) menuOverlay.classList.toggle('active', isActive); // ALTERADO
     });
 
     // --- APRIMORAMENTO: Fechar menu ao clicar no link ---
@@ -100,6 +102,7 @@ if (menuToggle && mainNav) {
         menuToggle.classList.remove('active');
         menuToggle.setAttribute('aria-expanded', 'false');
         body.classList.remove('no-scroll');
+        if (menuOverlay) menuOverlay.classList.remove('active'); // ALTERADO
     };
 
     navLinks.forEach(link => {
@@ -136,6 +139,11 @@ if (menuToggle && mainNav) {
             }
         });
     });
+
+    // ADICIONADO: Fechar menu ao clicar no overlay
+    if (menuOverlay) {
+        menuOverlay.addEventListener('click', closeMenu);
+    }
 }
 
 // --- Botão "Voltar ao Topo" ---

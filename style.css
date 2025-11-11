@@ -125,16 +125,28 @@ header.scrolled {
     position: relative; 
 }
 
+h1.logo {
+    margin: 0;
+    line-height: 1; /* Faz a altura do H1 se ajustar ao texto */
+}
+
 .logo a {
     font-family: var(--font-heading);
     font-size: 30px; /* ALTERADO */
-    font-weight: 800; /* ALTERADO */
+    font-weight: 700; /* ALTERADO */
     color: var(--text-color);
     text-decoration: none;
 }
 .logo a span {
     color: var(--logo-span);
     transition: color 0.3s ease;
+}
+
+/* REGRA ADICIONADA */
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espaço entre o botão e o logo */
 }
 
 /* APRIMORAMENTO: Nav agora é flex para conter <ul> e <button> */
@@ -201,9 +213,17 @@ body.dark-mode .icon-moon { display: none; }
     border: none;
     cursor: pointer;
     color: var(--text-color);
-    padding: 5px;
+    
+    /* ALTERAÇÃO: Controla o tamanho e centraliza o ícone */
+    padding: 0; /* Remove o padding que afeta a altura */
+    display: none; /* Oculto por padrão, 'flex' será aplicado no media query */
+    align-items: center;
+    justify-content: center;
+    /* Define uma área de clique fixa, alinhando o ícone (24px) no centro */
+    width: 34px; 
+    height: 34px; 
+
     z-index: 105;
-    display: none; /* Visível apenas no mobile */
 }
 #mobile-menu-toggle .icon-close { display: none; }
 #mobile-menu-toggle.active .icon-close { display: block; }
@@ -678,6 +698,20 @@ footer {
     height: 20px;
 }
 
+/* 11.1. OVERLAY DO MENU (NOVO) */
+.menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 99; /* Abaixo do nav (100) */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
 
 /* =================================================== */
 /* 12. MEDIA QUERIES (RESPONSIVO) - REVISADO          */
@@ -687,7 +721,7 @@ footer {
 @media (max-width: 768px) {
     
     #mobile-menu-toggle {
-        display: block;
+        display: flex;
     }
     
     /* MODIFICAÇÃO: Garante que o header seja fixed e ajuste o padding do body */
@@ -700,16 +734,19 @@ footer {
         padding-top: 71px; 
     }
     
+    /* MODIFICAÇÃO: Menu agora desliza da ESQUERDA */
     #main-nav {
         position: fixed;
-        top: 70px;
-        left: 0;
-        width: 100%;
+        top: 70px; /* Altura do header */
+        left: 0; /* Alinhado à esquerda */
+        width: 320px; /* Largura fixa */
+        max-width: 90%; /* Limite em telas muito pequenas */
         height: calc(100vh - 70px);
         background-color: var(--bg-color);
         border-top: 1px solid var(--border-color);
+        border-right: 1px solid var(--border-color); /* Borda na direita */
         
-        transform: translateX(100%);
+        transform: translateX(-100%); /* Começa fora da tela (à esquerda) */
         transition: transform 0.3s ease-in-out;
         
         overflow-y: auto;
@@ -717,16 +754,32 @@ footer {
         
         display: flex;
         flex-direction: column;
+        justify-content: space-between; /* Empurra o botão de tema para baixo */
+        box-shadow: 5px 0 15px rgba(0,0,0,0.1); /* Sombra na direita */
+    }
+    
+    body.dark-mode #main-nav {
+        box-shadow: 5px 0 15px rgba(0,0,0,0.4); /* Sombra na direita */
     }
     
     #main-nav.active {
-        transform: translateX(0);
+        transform: translateX(0); /* Posição final (visível) */
     }
     
+    /* MODIFICAÇÃO: Overlay fica visível quando o menu está ativo */
+    .menu-overlay {
+        z-index: 99; /* Garante que está abaixo do nav (z-index 100) */
+    }
+    .menu-overlay.active {
+        display: block;
+        opacity: 1;
+    }
+    
+    /* MODIFICAÇÃO: Alinha os links do menu à esquerda */
     #main-nav ul {
         flex-direction: column;
         gap: 15px;
-        align-items: center;
+        align-items: flex-start; /* Alinha à esquerda, não ao centro */
     }
     #main-nav a {
         font-size: 20px;
@@ -734,26 +787,29 @@ footer {
         padding: 10px 0;
     }
     
+    /* MODIFICAÇÃO: Botão de tema agora é um ícone no canto inferior direito */
     #theme-toggle {
-        margin-top: 40px; 
-        padding: 12px;
-        border: 1px solid var(--border-color);
-        border-radius: var(--border-radius);
+        margin-top: 40px; /* Espaço mínimo do conteúdo acima */
+        padding: 8px; /* Padding menor */
+        border: none;
+        border-radius: 50%; /* Circular */
         background-color: var(--card-bg);
-        width: 100%; 
+        width: 44px;  /* Tamanho fixo */
+        height: 44px; /* Tamanho fixo */
         display: flex; 
         justify-content: center;
         align-items: center;
-        gap: 10px;
-        font-weight: 600;
-        color: var(--text-color);
+        align-self: flex-end; /* Alinha à direita (dentro do menu) */
+        box-shadow: var(--shadow);
     }
     #theme-toggle:hover {
         background-color: var(--border-color);
-        transform: none; 
+        transform: scale(1.05); /* Mantém o hover */
     }
+    
+    /* MODIFICAÇÃO: Esconde o texto do botão de tema */
     .theme-toggle-text {
-        display: inline; 
+        display: none; 
     }
     
     .container {

@@ -19,13 +19,13 @@
 
     <header>
         <div class="container nav-container">
-            <h1 class="logo"><a href="index.html">Spectro<span>Tech</span></a></h1>
-            
-            <button id="mobile-menu-toggle" aria-label="Abrir menu" aria-expanded="false">
-                <i data-feather="menu" class="icon-menu"></i>
-                <i data-feather="x" class="icon-close"></i>
-            </button>
-
+            <div class="nav-left">
+                <button id="mobile-menu-toggle" aria-label="Abrir menu" aria-expanded="false">
+                    <i data-feather="menu" class="icon-menu"></i>
+                    <i data-feather="x" class="icon-close"></i>
+                </button>
+                <h1 class="logo"><a href="index.html">Spectro<span>Tech</span></a></h1>
+            </div>
             <nav id="main-nav">
                 <ul>
                     <li><a href="index.html" class="active">Inicio</a></li>
@@ -100,6 +100,8 @@
             </div>
         </section>
     </main>
+
+    <div class="menu-overlay"></div>
 
     <footer>
         <div class="footer-social">

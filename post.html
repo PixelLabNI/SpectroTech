@@ -20,24 +20,24 @@
 
     <header>
         <div class="container nav-container">
-            <h1 class="logo"><a href="index.html">Spectro<span>Tech</span></a></h1>
-            
-            <button id="mobile-menu-toggle" aria-label="Abrir menu" aria-expanded="false">
-                <i data-feather="menu" class="icon-menu"></i>
-                <i data-feather="x" class="icon-close"></i>
-            </button>
-
+            <div class="nav-left">
+                <button id="mobile-menu-toggle" aria-label="Abrir menu" aria-expanded="false">
+                    <i data-feather="menu" class="icon-menu"></i>
+                    <i data-feather="x" class="icon-close"></i>
+                </button>
+                <h1 class="logo"><a href="index.html">Spectro<span>Tech</span></a></h1>
+            </div>
             <nav id="main-nav">
                 <ul>
-                    <li><a href="index.html">Postagens</a></li>
+                    <li><a href="index.html" class="active">Inicio</a></li>
+                    <li><a href="posts.html">Todos os Posts</a></li>
                     <li><a href="index.html#about">Sobre Nós</a></li>
-                    <li><a href="https://pixellabni.github.io/website/" target="_blank">Desenvolvedora</a></li>
                 </ul>
                 
                 <button id="theme-toggle" aria-label="Alternar modo claro/escuro">
                     <i data-feather="moon" class="icon-moon"></i>
                     <i data-feather="sun" class="icon-sun"></i>
-                    <span class="theme-toggle-text">Alternar Tema</span>
+                    <span class="theme-toggle-text">Alternar Tema</span> 
                 </button>
             </nav>
         </div>
