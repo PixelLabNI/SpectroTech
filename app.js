@@ -167,16 +167,27 @@ if (backToTopButton) {
 // 3. VARIÁVEL GLOBAL E DETECÇÃO DE PÁGINA
 // ===================================
 let allPosts = []; 
+let categoryFilterEl = null; // NOVO
+let searchInputEl = null; // NOVO
 
 document.addEventListener('DOMContentLoaded', () => {
     const postsContainer = document.getElementById('posts-container');
     const postContent = document.getElementById('post-content');
-    const searchInput = document.getElementById('search-input'); 
+    
+    // ATUALIZADO: Salva referências globais
+    searchInputEl = document.getElementById('search-input'); 
+    categoryFilterEl = document.getElementById('category-filter'); // NOVO
 
     if (postsContainer) {
         fetchBlogPosts();
-        if (searchInput) {
-            searchInput.addEventListener('input', handleSearch); 
+        
+        // ATUALIZADO: Usa a nova função de filtro
+        if (searchInputEl) {
+            searchInputEl.addEventListener('input', filterAndDisplayPosts); 
+        }
+        // NOVO: Listener para o filtro de categoria
+        if (categoryFilterEl) { 
+            categoryFilterEl.addEventListener('change', filterAndDisplayPosts); 
         }
 
     } else if (postContent) {
@@ -213,20 +224,57 @@ function formatDate(timestamp, style = 'long') {
 }
 
 // ===================================
-// 4.1 LÓGICA DE BUSCA
+// 4.1 LÓGICA DE BUSCA E FILTRAGEM
 // ===================================
-function handleSearch(event) {
-    const searchTerm = event.target.value.toLowerCase().trim();
-    
-    // Filtra no array 'allPosts' completo 
-    const filteredPosts = allPosts.filter(post => {
-        const title = post.data.title.toLowerCase();
-        const snippet = post.data.snippet.toLowerCase();
-        const tags = (post.data.tags || []).join(' ').toLowerCase();
-        
-        return title.includes(searchTerm) || snippet.includes(searchTerm) || tags.includes(searchTerm);
-    });
 
+// NOVO: Função para popular o filtro de categoria
+function populateCategoryFilter() {
+    if (!categoryFilterEl) return;
+
+    // Cria um Set (lista de itens únicos) com as categorias, filtrando valores vazios
+    const categories = new Set(allPosts.map(post => post.data.category).filter(Boolean));
+    
+    const fragment = document.createDocumentFragment();
+    categories.forEach(category => {
+        const option = document.createElement('option');
+        option.value = category;
+        option.textContent = category;
+        fragment.appendChild(option);
+    });
+    
+    // Adiciona as novas <option> ao <select>
+    categoryFilterEl.appendChild(fragment);
+}
+
+// NOVO: Função centralizada que filtra por Categoria E Busca
+function filterAndDisplayPosts() {
+    // Pega os valores atuais dos filtros
+    const searchTerm = searchInputEl ? searchInputEl.value.toLowerCase().trim() : '';
+    const selectedCategory = categoryFilterEl ? categoryFilterEl.value : 'all';
+
+    let filteredPosts = allPosts;
+
+    // 1. Filtro por Categoria
+    if (selectedCategory !== 'all') {
+        filteredPosts = filteredPosts.filter(post => post.data.category === selectedCategory);
+    }
+
+    // 2. Filtro por Busca (título, snippet, tags E categoria)
+    if (searchTerm) {
+        filteredPosts = filteredPosts.filter(post => {
+            const title = post.data.title.toLowerCase();
+            const snippet = post.data.snippet.toLowerCase();
+            const tags = (post.data.tags || []).join(' ').toLowerCase();
+            const category = (post.data.category || '').toLowerCase(); // Inclui categoria na busca
+            
+            return title.includes(searchTerm) || 
+                   snippet.includes(searchTerm) || 
+                   tags.includes(searchTerm) ||
+                   category.includes(searchTerm);
+        });
+    }
+
+    // 3. Exibe os posts filtrados
     displayPosts(filteredPosts);
 }
 
@@ -245,7 +293,7 @@ function displayPosts(posts) {
     postsContainer.innerHTML = '';
 
     if (posts.length === 0) {
-        postsContainer.innerHTML = '<p style="text-align: center; padding: 40px 0;">Nenhum post encontrado para sua busca.</p>';
+        postsContainer.innerHTML = '<p style="text-align: center; padding: 40px 0;">Nenhum post encontrado.</p>';
         return;
     }
 
@@ -256,6 +304,9 @@ function displayPosts(posts) {
     postsToDisplay.forEach((postDoc, i) => { 
         const post = postDoc.data; 
         const postId = postDoc.id; 
+
+        // NOVO: Pega a categoria
+        const category = post.category || 'Geral';
 
         const thumbnailUrl = post.thumbnail || 'https://via.placeholder.com/400x200.png?text=spectrotech';
         const placeholderClass = post.thumbnail ? '' : 'placeholder';
@@ -283,6 +334,8 @@ function displayPosts(posts) {
                     height="200">
             </a>
             <div class="post-card-content">
+                <span class="post-card-category">${category}</span> 
+            
                 <span class="post-card-date">${formatDate(post.timestamp, 'short')}</span> 
                 ${tagsHTML}
                 <a href="post.html?id=${postId}">
@@ -337,7 +390,13 @@ async function fetchBlogPosts() {
             data: doc.data()
         }));
 
-        displayPosts(allPosts); // 'allPosts' agora tem no máximo 3 itens na Home
+        // NOVO: Se estiver na página de posts (não-home), popula o filtro
+        if (!isHomePage) {
+            populateCategoryFilter();
+        }
+
+        // ATUALIZADO: Chama a nova função de filtro para a exibição inicial
+        filterAndDisplayPosts(); 
 
     } catch (error) {
         console.error("Erro ao buscar posts:", error);
@@ -389,6 +448,9 @@ async function fetchSinglePost() {
 
             postContent.setAttribute('aria-busy', 'false');
 
+            // NOVO: Pega a categoria
+            const category = post.category || 'Geral';
+
             const tags = post.tags || [];
             let tagsHTML = '';
             if (tags.length > 0) {
@@ -402,6 +464,9 @@ async function fetchSinglePost() {
             let postHTML = `
                 <h2>${post.title}</h2>
                 <div class="post-meta">
+                    <span class="post-meta-category">${category}</span>
+                    <span class="post-meta-separator">|</span>
+                
                     Publicado em ${formatDate(post.timestamp, 'long')} por Mateus Calixto
                 </div>
                 ${tagsHTML}

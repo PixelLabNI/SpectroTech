@@ -313,6 +313,20 @@ body.dark-mode .post-card-image.placeholder {
     display: flex;
     flex-direction: column;
 }
+
+/* NOVO: Estilo da Categoria no Card */
+.post-card-category {
+    display: inline-block;
+    background: var(--primary-color);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 5px;
+    margin-bottom: 12px;
+    align-self: flex-start; /* Garante que não estique */
+}
+
 .post-card-date {
     font-size: 14px;
     color: var(--subtle-text);
@@ -409,6 +423,30 @@ body.dark-mode .post-card-image.placeholder {
 .view-all-posts {
     text-align: center;
     margin: 40px 0 60px 0; 
+    padding-bottom: 5px; /* Espaço para sombra */
+}
+
+.view-all-posts .cta-button {
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 14px 30px; /* Aumenta um pouco o padding */
+    font-weight: 700; /* Mais negrito */
+    border-radius: 50px; /* Bordas arredondadas (estilo "pilula") */
+    text-transform: uppercase; /* Caixa alta */
+    font-size: 14px;
+    letter-spacing: 0.5px; /* Espaçamento entre letras */
+    transition: all 0.3s ease; /* Transição mais completa */
+    margin-top: 0; /* Reseta a margem padrão do .cta-button */
+}
+
+.view-all-posts .cta-button:hover {
+    background: var(--primary-color);
+    color: #fff; /* Cor do texto no hover */
+    border-color: var(--primary-color); /* Garante a cor da borda */
+    transform: translateY(-3px); /* Efeito de elevação */
+    box-shadow: var(--shadow-hover); /* Sombra mais forte */
+    text-decoration: none; /* Remove sublinhado */
 }
 
 
@@ -505,7 +543,24 @@ body.dark-mode .skeleton-text {
     
     border-bottom: 1px dashed var(--border-color); 
     transition: border-color 0.3s ease;
+    
+    /* NOVO: Para alinhar categoria e data */
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
 }
+
+/* NOVO: Estilo da Categoria no Post Individual */
+.post-meta-category {
+    font-weight: 700;
+    color: var(--primary-color);
+}
+.post-meta-separator {
+    font-size: 18px;
+    color: var(--border-color); /* Separador sutil */
+}
+
 .post-individual .post-tags {
     margin-bottom: 40px;
 }

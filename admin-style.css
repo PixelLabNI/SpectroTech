@@ -153,7 +153,8 @@ header {
     color: var(--text-color);
 }
 .form-group input, 
-.form-group textarea {
+.form-group textarea,
+.form-group select { /* <-- ADICIONADO */
     width: 100%;
     padding: 12px;
     border: 1px solid var(--border-color);
@@ -161,8 +162,12 @@ header {
     background-color: var(--card-bg);
     color: var(--text-color);
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    font-family: var(--font-body); /* <-- ADICIONADO */
+    font-size: 15px; /* <-- ADICIONADO */
 }
-.form-group input:focus, .form-group textarea:focus {
+.form-group input:focus, 
+.form-group textarea:focus,
+.form-group select:focus { /* <-- ADICIONADO */
     outline: none;
     border-color: var(--primary-color);
     box-shadow: var(--focus-ring);
@@ -332,7 +337,8 @@ body.dark-mode {
         background-color: #353535;
     }
     .form-group input, 
-    .form-group textarea {
+    .form-group textarea,
+    .form-group select { /* <-- ADICIONADO */
         border-color: #4f4f4f;
     }
 }

@@ -170,6 +170,10 @@ function openEditor(postData = null, postId = null) {
         document.getElementById('post-id-hidden').value = postId;
         document.getElementById('post-title').value = postData.title || '';
         document.getElementById('post-snippet').value = postData.snippet || '';
+        
+        // NOVO: Carrega a categoria
+        document.getElementById('post-category').value = postData.category || 'Geral'; 
+        
         document.getElementById('post-content').value = postData.content || '';
         document.getElementById('post-thumbnail').value = postData.thumbnail || null;
         document.getElementById('post-youtube').value = postData.youtubeUrl || null;
@@ -181,6 +185,10 @@ function openEditor(postData = null, postId = null) {
     } else {
         editorTitle.textContent = 'Adicionar Novo Post';
         document.getElementById('post-id-hidden').value = '';
+        
+        // NOVO: Define a categoria padrão
+        document.getElementById('post-category').value = 'Geral'; 
+        
         deletePostBtn.style.display = 'none'; 
     }
     
@@ -324,6 +332,10 @@ if (postForm) {
 
         const postData = {
             title: document.getElementById('post-title').value,
+            
+            // NOVO: Adiciona a categoria ao objeto de dados
+            category: document.getElementById('post-category').value, 
+            
             snippet: document.getElementById('post-snippet').value,
             content: document.getElementById('post-content').value,
             thumbnail: document.getElementById('post-thumbnail').value || null,
