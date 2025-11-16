@@ -16,13 +16,20 @@
     <link rel="stylesheet" href="style.css">
         
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZC10VQ7LXQ"></script>
 <script>
+  // Define dataLayer e a função gtag
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
+  // ✅ ADICIONADO: Define o estado de consentimento padrão como 'negado'
+  gtag('consent', 'default', {
+    'analytics_storage': 'denied'
+  });
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZC10VQ7LXQ"></script>
+<script>
+  // Configuração (não enviará dados até o consentimento)
+  gtag('js', new Date());
   gtag('config', 'G-ZC10VQ7LXQ');
 </script>
 <body>
@@ -81,6 +88,18 @@
         </div>
         <p>SpectroTech | <a href="https://pixellabni.github.io/website/">Pixel Lab NI</a></p>
     </footer>
+
+    <div id="cookie-consent-banner">
+        <div class="container cookie-container">
+            <p>Usamos cookies (do Google Analytics) para entender como você usa nosso site e melhorar sua experiência. <a href="httpsa://policies.google.com/technologies/cookies" target="_blank" rel="noopener noreferrer">Saiba mais</a>.</p>
+            <div class="cookie-buttons">
+                <button id="cookie-accept" class="cta-button">Aceitar</button>
+                <button id="cookie-reject">Rejeitar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="menu-overlay"></div>
 
     <button id="back-to-top" aria-label="Voltar ao topo">
         <i data-feather="arrow-up"></i>

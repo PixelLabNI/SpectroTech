@@ -162,6 +162,56 @@ if (backToTopButton) {
     });
 }
 
+// ===================================
+// 2.2 LÓGICA DE CONSENTIMENTO DE COOKIES (LGPD/GDPR) (NOVO)
+// ===================================
+const cookieBanner = document.getElementById('cookie-consent-banner');
+const acceptButton = document.getElementById('cookie-accept');
+const rejectButton = document.getElementById('cookie-reject');
+
+if (cookieBanner && acceptButton && rejectButton) {
+    const consent = localStorage.getItem('cookie_consent');
+
+    const grantConsent = () => {
+        if (typeof gtag === 'function') {
+            gtag('consent', 'update', { 'analytics_storage': 'granted' });
+        }
+        console.log("Cookie consent granted.");
+    };
+
+    const denyConsent = () => {
+        if (typeof gtag === 'function') {
+            gtag('consent', 'update', { 'analytics_storage': 'denied' });
+        }
+        console.log("Cookie consent denied.");
+    };
+
+    if (consent === 'accepted') {
+        // Se já aceitou, atualiza o consentimento do gtag
+        grantConsent();
+    } else if (consent === 'rejected') {
+        // Se já rejeitou, garante que o consentimento seja 'negado'
+        denyConsent();
+    } else {
+        // Se não há escolha, mostra o banner
+        cookieBanner.classList.add('visible');
+    }
+
+    // Evento ao clicar em "Aceitar"
+    acceptButton.addEventListener('click', () => {
+        localStorage.setItem('cookie_consent', 'accepted');
+        cookieBanner.classList.remove('visible');
+        grantConsent();
+    });
+
+    // Evento ao clicar em "Rejeitar"
+    rejectButton.addEventListener('click', () => {
+        localStorage.setItem('cookie_consent', 'rejected');
+        cookieBanner.classList.remove('visible');
+        denyConsent();
+    });
+}
+
 
 // ===================================
 // 3. VARIÁVEL GLOBAL E DETECÇÃO DE PÁGINA

@@ -773,6 +773,86 @@ footer {
     transition: opacity 0.3s ease;
 }
 
+/* 11.2. COOKIE CONSENT BANNER (NOVO) */
+#cookie-consent-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--header-bg); /* Reutiliza a cor do header */
+    padding: 20px 0;
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+    z-index: 90;
+    border-top: 1px solid var(--border-color);
+    
+    /* Oculto por padrão, controlado pelo JS */
+    transform: translateY(100%);
+    visibility: hidden;
+    opacity: 0;
+    transition: transform 0.3s ease, visibility 0.3s ease, opacity 0.3s ease;
+}
+
+#cookie-consent-banner.visible {
+    transform: translateY(0);
+    visibility: visible;
+    opacity: 1;
+}
+
+body.dark-mode #cookie-consent-banner {
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.cookie-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.cookie-container p {
+    margin: 0;
+    font-size: 15px;
+    color: var(--subtle-text);
+    flex-grow: 1;
+}
+.cookie-container p a {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+.cookie-container p a:hover {
+    color: var(--primary-hover);
+}
+
+.cookie-buttons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-shrink: 0;
+}
+
+/* Reutiliza .cta-button para o "Aceitar" */
+#cookie-accept {
+    padding: 10px 20px; /* Um pouco menor que o .cta-button padrão */
+    margin-top: 0; /* Reseta a margem */
+}
+
+/* Estilo para o "Rejeitar" */
+#cookie-reject {
+    background: transparent;
+    border: none;
+    color: var(--subtle-text);
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: var(--border-radius);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+#cookie-reject:hover {
+    background-color: var(--border-color);
+    color: var(--text-color);
+}
+
 
 /* =================================================== */
 /* 12. MEDIA QUERIES (RESPONSIVO) - REVISADO          */
@@ -972,6 +1052,31 @@ footer {
 
     footer {
         padding: 30px 0;
+    }
+
+    /* NOVO: Responsivo do Cookie Banner */
+    .cookie-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .cookie-container p {
+        font-size: 14px;
+        text-align: center;
+        width: 100%;
+    }
+    .cookie-buttons {
+        width: 100%;
+        justify-content: center; /* Centraliza os botões no mobile */
+    }
+    #cookie-accept {
+        flex-grow: 1; /* Faz o botão "Aceitar" crescer */
+        text-align: center;
+    }
+    #cookie-reject {
+        flex-grow: 1; /* Faz o botão "Rejeitar" crescer */
+        text-align: center;
+        background-color: var(--border-color); /* Dá mais destaque no mobile */
     }
     
     /* --- Estilos de conteúdo do post --- */
