@@ -63,15 +63,17 @@
         <section class="main-posts posts-full-list" id="posts">
             <h2>Todas as Postagens</h2>
 
-            <div class="search-container">
-                <i data-feather="search" class="search-icon"></i>
-                <input type="search" id="search-input" placeholder="Buscar por título ou palavra-chave...">
-            </div>
-            
-            <div class="filter-container">
-                <select id="category-filter" aria-label="Filtrar por categoria">
-                    <option value="all">Todas as Categorias</option>
-                    </select>
+            <div class="filters-wrapper">
+                <div class="search-container">
+                    <i data-feather="search" class="search-icon"></i>
+                    <input type="search" id="search-input" placeholder="Buscar por título ou palavra-chave...">
+                </div>
+                
+                <div class="filter-container">
+                    <select id="category-filter" aria-label="Filtrar por categoria">
+                        <option value="all">Todas as Categorias</option>
+                        </select>
+                </div>
             </div>
             
             <div id="posts-container" data-homepage="false">

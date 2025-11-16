@@ -487,7 +487,23 @@ async function fetchSinglePost() {
                  return; // Sai da função se for rascunho
             }
             
-            document.title = `${post.title} | SMarqueza Digital`;
+            // ✅ ATUALIZAÇÃO DE SEO E CORREÇÃO:
+            // 1. Corrige o título para usar o nome do site (SpectroTech)
+            // 2. Atualiza a meta description para o snippet do post
+            
+            document.title = `${post.title} | SpectroTech`;
+
+            const metaDesc = document.querySelector('meta[name="description"]');
+            if (metaDesc) {
+                metaDesc.setAttribute('content', post.snippet);
+            } else {
+                // Fallback caso a tag não exista no HTML (embora tenhamos adicionado)
+                const newMetaDesc = document.createElement('meta');
+                newMetaDesc.setAttribute('name', 'description');
+                newMetaDesc.setAttribute('content', post.snippet);
+                document.head.appendChild(newMetaDesc);
+            }
+            // Fim da atualização de SEO
 
             if (postLoader) postLoader.remove();
             
