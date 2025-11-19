@@ -18,12 +18,12 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC3E77YNxUs2sm35xOXwz01EVB-g9CyQNM",
-  authDomain: "portal-spectrotech.firebaseapp.com",
-  projectId: "portal-spectrotech",
-  storageBucket: "portal-spectrotech.firebasestorage.app",
-  messagingSenderId: "1053602493345",
-  appId: "1:1053602493345:web:4cc343601579f8a5f0d1e0",
+    apiKey: "AIzaSyC3E77YNxUs2sm35xOXwz01EVB-g9CyQNM",
+    authDomain: "portal-spectrotech.firebaseapp.com",
+    projectId: "portal-spectrotech",
+    storageBucket: "portal-spectrotech.firebasestorage.app",
+    messagingSenderId: "1053602493345",
+    appId: "1:1053602493345:web:4cc343601579f8a5f0d1e0",
 };
 
 const app = initializeApp(firebaseConfig);
@@ -123,7 +123,7 @@ if (menuToggle && mainNav) {
 
             if (isSamePageAnchor) {
                 e.preventDefault(); 
-                closeMenu();        
+                closeMenu();     
 
                 setTimeout(() => {
                     const targetId = href.split('#')[1];
@@ -318,9 +318,9 @@ function filterAndDisplayPosts() {
             const category = (post.data.category || '').toLowerCase(); // Inclui categoria na busca
             
             return title.includes(searchTerm) || 
-                   snippet.includes(searchTerm) || 
-                   tags.includes(searchTerm) ||
-                   category.includes(searchTerm);
+                       snippet.includes(searchTerm) || 
+                       tags.includes(searchTerm) ||
+                       category.includes(searchTerm);
         });
     }
 

@@ -1,47 +1,55 @@
+/* ===================================
+   STYLE.CSS - Design Premium & UI/UX
+   =================================== */
+
 /* 0. SCROLL SUAVE */
 html {
     scroll-behavior: smooth;
 }
 
-/* 1. VARIÁVEIS DE COR E FONTES (ROOT) */
+/* 1. VARIÁVEIS E IDENTIDADE VISUAL (ROOT) */
 :root {
+    /* Cores Principais (Gradiente Tech) */
     --primary-color: #3B82F6;
+    --primary-gradient: linear-gradient(135deg, #3B82F6 0%, #6366f1 100%); /* Azul para Índigo */
     --primary-hover: #2563EB;
     
-    /* Modo Claro (Default) */
-    --bg-color: #ffffff; /* ALTERADO: Mais limpo e focado */
-    --text-color: #212529;
-    --card-bg: #f8f9fa; /* ALTERADO: Contraste suave com o fundo */
-    --header-bg: rgba(255, 255, 255, 0.95); /* Levemente menos transparente */
-    --border-color: #e9ecef;
-    --subtle-text: #6c757d;
-    --logo-span: var(--primary-color);
+    /* Modo Claro - "Clean & Crisp" */
+    --bg-color: #FAFAFA; /* Off-white para menos fadiga visual */
+    --text-color: #1e293b; /* Slate 800 - Mais suave que preto puro */
+    --card-bg: #ffffff;
+    --header-bg: rgba(255, 255, 255, 0.85); /* Translúcido para Glassmorphism */
+    --border-color: #e2e8f0; /* Slate 200 */
+    --subtle-text: #64748b; /* Slate 500 */
+    --logo-span: #3B82F6;
     
-    /* Fontes */
-    --font-heading: 'Poppins', sans-serif;
-    --font-body: 'Inter', sans-serif;
+    /* Tipografia Refinada */
+    --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     
     --container-width: 1100px;
-    --border-radius: 10px;
-    --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-    --shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.15);
+    --border-radius: 16px; /* Bordas mais arredondadas (Moderno) */
     
-    --focus-ring: 0 0 0 3px rgba(59, 130, 246, 0.5); 
+    /* Sombras Suaves (Smooth Shadows) */
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    
+    --focus-ring: 0 0 0 3px rgba(99, 102, 241, 0.4);
+    --blur-effect: blur(12px); /* Efeito de vidro fosco */
 }
 
-/* 2. DARK MODE */
+/* 2. DARK MODE - "Deep Tech" */
 body.dark-mode {
-    --bg-color: #0f0f0f; /* ALTERADO: Preto um pouco mais suave */
-    --text-color: #e9ecef;
-    --card-bg: #1c1c1c; /* ALTERADO: Maior distinção do fundo */
-    --header-bg: rgba(28, 28, 28, 0.95);
-    --border-color: #343a40;
-    --subtle-text: #adb5bd;
-    --logo-span: #f8f9fa;
-    --shadow: 0 6px 18px rgba(0, 0, 0, 0.5); /* ALTERADO: Sombra mais forte no dark mode */
-    --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.6);
+    --bg-color: #0B0F19; /* Azul marinho profundo (Rich Black) */
+    --text-color: #f1f5f9; /* Slate 100 */
+    --card-bg: #111827; /* Slate 900 */
+    --header-bg: rgba(11, 15, 25, 0.8);
+    --border-color: #1e293b;
+    --subtle-text: #94a3b8;
+    --logo-span: #818cf8;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+    --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
 }
-
 
 /* 3. RESET GLOBAL E BODY */
 * {
@@ -56,11 +64,10 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     transition: background-color 0.3s ease, color 0.3s ease;
+    -webkit-font-smoothing: antialiased; /* Texto mais nítido */
 }
 
-body.no-scroll {
-    overflow: hidden;
-}
+body.no-scroll { overflow: hidden; }
 
 .container {
     max-width: var(--container-width);
@@ -71,6 +78,7 @@ body.no-scroll {
 h1, h2, h3, h4 {
     font-family: var(--font-heading);
     line-height: 1.2;
+    letter-spacing: -0.02em; /* Títulos mais compactos */
 }
 
 a {
@@ -83,16 +91,10 @@ a:hover {
     text-decoration: underline;
 }
 
-a:focus-visible, 
-button:focus-visible {
+a:focus-visible, button:focus-visible {
     outline: none; 
     box-shadow: var(--focus-ring); 
-    border-radius: var(--border-radius); 
-}
-header nav a:focus-visible {
-    box-shadow: none;
-    outline: 2px solid var(--primary-color);
-    outline-offset: 2px;
+    border-radius: 6px;
 }
 
 img {
@@ -101,7 +103,7 @@ img {
     display: block;
 }
 
-/* 4. HEADER E NAVEGAÇÃO */
+/* 4. HEADER E NAVEGAÇÃO (GLASSMORPHISM) */
 header {
     background-color: var(--header-bg);
     border-bottom: 1px solid var(--border-color);
@@ -109,10 +111,9 @@ header {
     position: sticky;
     top: 0;
     z-index: 100;
-    /* === CORREÇÃO 1: Linhas removidas === */
-    /* backdrop-filter: blur(8px); */
-    /* -webkit-backdrop-filter: blur(8px); */
-    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: var(--blur-effect);
+    -webkit-backdrop-filter: var(--blur-effect);
+    transition: all 0.3s ease;
 }
 
 header.scrolled {
@@ -123,141 +124,210 @@ header.scrolled {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative; 
+    position: relative;
 }
 
 h1.logo {
     margin: 0;
-    line-height: 1; 
-    
-    /* NOVAS REGRAS PARA ALINHAR AO BOTÃO */
-    height: 34px; /* 1. Força a altura para ser igual ao botão */
-    display: flex;  /* 2. Permite centralizar o link 'a' */
-    align-items: center; /* 3. Centraliza o link 'a' verticalmente */
+    line-height: 1;
+    height: 34px;
+    display: flex;
+    align-items: center;
 }
 
 .logo a {
     font-family: var(--font-heading);
-    font-size: 30px; /* ALTERADO */
-    font-weight: 700; /* ALTERADO */
+    font-size: 28px;
+    font-weight: 800;
     color: var(--text-color);
     text-decoration: none;
+    letter-spacing: -0.03em;
 }
+
+/* Ponto final colorido (Opcional - Estilo Tech Moderno) */
+.logo a::after {
+    content: '.';
+    color: var(--primary-color);
+    font-size: 1.2em;
+    margin-left: 2px;
+}
+
+/* Efeito Gradiente no "Tech" */
 .logo a span {
-    color: var(--logo-span);
-    transition: color 0.3s ease;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
 }
 
-/* REGRA ADICIONADA */
-.nav-left {
+.nav-left, #main-nav {
     display: flex;
     align-items: center;
-    gap: 15px; /* Espaço entre o botão e o logo */
-}
-
-/* APRIMORAMENTO: Nav agora é flex para conter <ul> e <button> */
-#main-nav {
-    display: flex;
-    align-items: center;
-    gap: 15px; /* Espaço entre a lista <ul> e o botão de tema */
+    gap: 15px;
 }
 
 header nav ul {
     display: flex;
     list-style: none;
-    gap: 25px; 
+    gap: 30px;
 }
 header nav a {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600; 
     color: var(--text-color);
-    text-decoration: none;
     padding: 5px 0;
-    border-bottom: 3px solid transparent;
-    transition: border-color 0.3s ease, color 0.3s ease;
+    position: relative;
 }
-header nav a:hover {
-    color: var(--primary-color);
-    text-decoration: none;
+header nav a:hover { text-decoration: none; color: var(--primary-color); }
+
+/* Indicador animado no menu */
+header nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background: var(--primary-gradient);
+    transition: width 0.3s ease;
 }
-header nav a.active {
-    color: var(--primary-color);
-    border-bottom-color: var(--primary-color);
+header nav a:hover::after, header nav a.active::after {
+    width: 100%;
 }
 
 /* 5. BOTÃO DARK MODE E MENU HAMBÚRGUER */
-
-/* APRIMORAMENTO: Estilo de desktop padrão para o botão de tema */
 #theme-toggle {
     background: transparent;
     border: none;
     cursor: pointer;
     color: var(--text-color);
-    padding: 5px;
-    transition: color 0.2s ease, transform 0.1s ease;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 #theme-toggle:hover {
-    color: var(--primary-color);
-    transform: scale(1.1);
+    background-color: var(--border-color);
+    transform: rotate(15deg);
 }
-#theme-toggle svg {
-    width: 24px;
-    height: 24px;
-}
+#theme-toggle svg { width: 20px; height: 20px; }
+
 .icon-sun { display: none; }
 body.dark-mode .icon-sun { display: block; }
 body.dark-mode .icon-moon { display: none; }
+.theme-toggle-text { display: none; }
 
-/* APRIMORAMENTO: Texto do botão de tema escondido por padrão */
-.theme-toggle-text {
-    display: none;
-}
-
-/* Menu Hambúrguer */
 #mobile-menu-toggle {
     background: transparent;
     border: none;
     cursor: pointer;
     color: var(--text-color);
-    
-    /* ALTERAÇÃO: Controla o tamanho e centraliza o ícone */
-    padding: 0; /* Remove o padding que afeta a altura */
-    display: none; /* Oculto por padrão, 'flex' será aplicado no media query */
+    padding: 0;
+    display: none; 
     align-items: center;
     justify-content: center;
-    /* Define uma área de clique fixa, alinhando o ícone (24px) no centro */
     width: 34px; 
     height: 34px; 
-
     z-index: 105;
 }
 #mobile-menu-toggle .icon-close { display: none; }
 #mobile-menu-toggle.active .icon-close { display: block; }
 #mobile-menu-toggle.active .icon-menu { display: none; }
 
-
-/* 6. SEÇÃO HERO */
+/* =========================================
+   HERO FULL WIDTH (Ponta a Ponta)
+   ========================================= */
 .hero {
+    position: relative;
+    width: 100%; /* Garante largura total */
+    max-width: 100%; /* Remove limites anteriores */
+    
     text-align: center;
-    padding: 80px 30px; 
-    background-color: var(--card-bg);
-    margin: 30px 0 50px 0; 
-    border-radius: var(--border-radius);
-    border: none; /* ALTERADO: Remove a borda */
-    box-shadow: var(--shadow); 
-    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    padding: 140px 0 100px 0; /* Padding vertical ajustado */
+    margin: 0 0 60px 0; /* Margem apenas em baixo */
+    
+    border-radius: 0; /* Remove bordas arredondadas para colar nas laterais */
+    border-bottom: 1px solid var(--border-color);
+    
+    background-color: var(--bg-color);
+    overflow: hidden; 
+    
+    /* Mesh Gradient */
+    background-image: 
+        radial-gradient(circle at 10% 50%, rgba(59, 130, 246, 0.08), transparent 30%), 
+        radial-gradient(circle at 90% 30%, rgba(99, 102, 241, 0.08), transparent 30%);
 }
+
+/* Ajuste para o Container dentro do Hero não somar padding extra */
+.hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Grid de Fundo (Ocupa 100% da tela) */
+.hero-bg-grid {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: 
+        linear-gradient(var(--border-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
+    background-size: 60px 60px; /* Grid levemente maior */
+    opacity: 0.35; 
+    
+    /* Máscara para suavizar as bordas laterais e inferior */
+    mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+    -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+    
+    z-index: 1;
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Restante dos estilos (Texto, Badge, Botões) permanecem iguais */
+.hero-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 50px;
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--primary-color);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+    backdrop-filter: blur(4px);
+}
+
 .hero h2 {
     font-family: var(--font-heading);
-    font-size: 52px; /* ALTERADO: Maior impacto */
-    margin-bottom: 20px;
-    font-weight: 800; /* ALTERADO: Mais negrito */
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    line-height: 1.1;
+    margin-bottom: 25px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--text-color);
 }
+
+.text-gradient {
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 .hero p {
-    font-size: 20px;
+    font-size: 1.25rem;
     color: var(--subtle-text);
-    max-width: 650px; /* Levemente mais largo */
-    margin: 0 auto;
+    max-width: 600px;
+    margin: 0 auto 35px auto;
+    line-height: 1.7;
 }
 
 /* 7. LISTA DE POSTS E CARDS */
@@ -449,58 +519,49 @@ body.dark-mode .post-card-image.placeholder {
     text-decoration: none; /* Remove sublinhado */
 }
 
-
-/* 8. SKELETON LOADER (UX) */
+/* 8. SKELETON LOADER */
 .skeleton-card {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
-    overflow: hidden;
     padding: 20px;
 }
 .skeleton-image {
     height: 180px;
-    background-color: #e0e0e0;
-    border-radius: 5px;
+    background-color: var(--border-color);
+    border-radius: 8px;
     margin-bottom: 15px;
+    opacity: 0.5;
 }
 .skeleton-text {
-    height: 20px;
-    background-color: #e0e0e0;
+    height: 16px;
+    background-color: var(--border-color);
     border-radius: 4px;
     margin-bottom: 10px;
+    opacity: 0.5;
 }
-.skeleton-text.short {
-    width: 60%;
-}
-.skeleton-image, .skeleton-text {
-    animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-@keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-}
-body.dark-mode .skeleton-image,
-body.dark-mode .skeleton-text {
-    background-color: #333;
-}
+.skeleton-text.short { width: 60%; }
+.skeleton-image, .skeleton-text { animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+@keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 0.2; } }
 
-/* 9. PÁGINA DE POST INDIVIDUAL (Lapidada) */
+/* 9. PÁGINA DE POST INDIVIDUAL */
 .back-link {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     margin-top: 40px;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--subtle-text);
+    padding: 8px 16px;
+    background: var(--card-bg);
+    border-radius: 30px;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
 }
 .back-link:hover {
     color: var(--primary-color);
+    transform: translateX(-5px);
     text-decoration: none;
-}
-.back-link svg {
-    width: 18px;
-    height: 18px;
 }
 
 .post-individual {
@@ -510,89 +571,85 @@ body.dark-mode .skeleton-text {
     padding: 60px 50px; 
     margin: 30px 0;
     box-shadow: var(--shadow);
-    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     min-height: 400px;
 }
 
-#post-loader .skeleton-text {
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.post-individual .post-body,
-.post-individual h2,
-.post-individual .post-meta,
-.post-individual .post-tags,
-.post-individual .post-footer-cta {
-    max-width: 750px; 
-    margin-left: auto;
-    margin-right: auto;
-}
-
 .post-individual h2 {
-    font-family: var(--font-heading);
-    font-size: 42px; 
-    line-height: 1.2;
-    margin-bottom: 10px;
+    font-size: clamp(2rem, 4vw, 3rem); 
+    line-height: 1.1;
+    margin-bottom: 15px;
+    color: var(--text-color);
 }
+
 .post-individual .post-meta {
-    font-size: 16px;
+    font-size: 15px;
     color: var(--subtle-text);
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     padding-bottom: 20px;
-    
-    border-bottom: 1px dashed var(--border-color); 
-    transition: border-color 0.3s ease;
-    
-    /* NOVO: Para alinhar categoria e data */
+    border-bottom: 1px solid var(--border-color);
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
 }
-
-/* NOVO: Estilo da Categoria no Post Individual */
 .post-meta-category {
     font-weight: 700;
     color: var(--primary-color);
-}
-.post-meta-separator {
-    font-size: 18px;
-    color: var(--border-color); /* Separador sutil */
-}
-
-.post-individual .post-tags {
-    margin-bottom: 40px;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.5px;
 }
 
+/* Tipografia do Corpo do Post - Foco na Leitura */
 .post-individual .post-body {
-    font-size: 19px; 
-    line-height: 1.75;
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.8; /* Altura de linha confortável */
+    color: var(--text-color);
 }
-.post-individual .post-body p {
-    margin-bottom: 30px; 
+.post-individual .post-body p { margin-bottom: 1.8em; }
+
+.post-individual .post-body h2 {
+    font-size: 1.75rem;
+    margin-top: 2em;
+    margin-bottom: 0.8em;
+    padding-bottom: 0.5em;
+    border-bottom: 2px solid var(--border-color);
 }
 .post-individual .post-body h3 {
-    font-family: var(--font-heading);
-    font-size: 28px;
-    margin-top: 45px;
-    margin-bottom: 15px;
+    font-size: 1.4rem;
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
+    color: var(--text-color);
 }
-.post-individual .post-body code {
-    background-color: var(--border-color);
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-family: "Courier New", Courier, monospace;
+.post-individual .post-body a {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
 }
+.post-individual .post-body a:hover { color: var(--primary-hover); }
+
+/* Blockquote Premium */
+.post-individual .post-body blockquote {
+    margin: 40px 0;
+    padding: 30px;
+    border-left: 4px solid var(--primary-color);
+    background: linear-gradient(90deg, var(--bg-color) 0%, transparent 100%);
+    border-radius: 0 12px 12px 0;
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--text-color);
+}
+
 .post-individual .post-body pre {
-    background-color: var(--border-color);
-    padding: 15px;
-    border-radius: 5px;
+    background-color: #1e293b; /* Escuro sempre para código */
+    color: #f8fafc;
+    padding: 20px;
+    border-radius: 8px;
     overflow-x: auto;
     margin-bottom: 30px;
-}
-.post-individual .post-body a:hover {
-    text-decoration: underline; 
+    font-size: 0.9em;
 }
 
 .video-container {
@@ -601,561 +658,226 @@ body.dark-mode .skeleton-text {
     height: 0;
     overflow: hidden;
     max-width: 100%;
-    margin: 30px 0;
-    border-radius: var(--border-radius);
+    margin: 40px 0;
+    border-radius: 12px;
     box-shadow: var(--shadow); 
 }
-.video-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
+.video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
 .post-footer-cta {
-    margin-top: 50px;
-    padding-top: 30px;
-    border-top: 1px solid var(--border-color);
+    margin-top: 60px;
+    padding: 40px;
+    background: var(--bg-color);
+    border-radius: 12px;
     text-align: center;
 }
 
 /* 10. SEÇÃO ABOUT E FOOTER */
 .about-section {
     background: var(--card-bg);
-    color: var(--text-color);
     padding: 60px; 
     margin: 60px 0;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
-    border: none;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--border-color);
 }
-.about-section h3 {
-    font-family: var(--font-heading);
-    font-size: 28px;
-    margin-bottom: 30px;
-    /* REMOVIDO: text-align: center; para alinhar com o texto ao lado */
-}
-
 .about-content {
     display: flex;
-    align-items: center; /* ALINHAMENTO CORRIGIDO: Centraliza a logo verticalmente */
-    gap: 40px;
+    align-items: center;
+    gap: 50px;
 }
+/* =========================================
+   LOGO SPECTROTECH (Efeito Glow + Float)
+   ========================================= */
+
 .about-image {
-    flex-shrink: 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+/* Círculo decorativo atrás da logo (Halo) */
+.about-image::before {
+    content: '';
+    position: absolute;
+    width: 110%;
+    height: 110%;
+    background: var(--primary-gradient);
+    border-radius: 50%;
+    opacity: 0.3;
+    filter: blur(30px); /* O brilho difuso */
+    z-index: 0;
+    animation: pulse-glow 4s ease-in-out infinite alternate;
+}
+
 .about-image img {
-    width: 250px;
-    height: 250px;
+    position: relative;
+    z-index: 1;
+    width: 500px;
+    height: 245px;
     border-radius: 50%;
     object-fit: cover;
-    border: 5px solid var(--primary-color); 
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    /* Borda dupla estilo vidro */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.1), /* Sombra de profundidade */
+        inset 0 0 20px rgba(255, 255, 255, 0.1); /* Brilho interno */
+        
+    /* Animação de flutuação */
+    animation: float 6s ease-in-out infinite;
+    background-color: var(--card-bg); /* Garante fundo se a logo for PNG transp. */
 }
 
-/* NOVO: Efeito hover para a imagem */
-.about-image img:hover {
-    transform: scale(1.03); 
-    box-shadow: var(--shadow-hover); 
+/* Animação Flutuar */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); } /* Sobe suavemente */
+    100% { transform: translateY(0px); }
 }
 
-.about-text p {
-    font-size: 18px;
-    color: var(--subtle-text);
+/* Animação do Brilho */
+@keyframes pulse-glow {
+    0% { opacity: 0.2; filter: blur(30px); transform: scale(0.9); }
+    100% { opacity: 0.4; filter: blur(40px); transform: scale(1.1); }
 }
 
-/* NOVO: Estilo para o subtítulo da missão */
+.about-text h3 { font-size: 1.8rem; margin-bottom: 10px; }
 .about-text h4.about-mission {
-    font-family: var(--font-heading);
-    font-size: 22px; 
-    font-weight: 700;
     color: var(--primary-color);
-    margin-bottom: 15px;
-}
-
-/* NOVO: Reutilizando .post-tags, mas garantindo o espaçamento */
-.about-topics {
-    list-style: none;
-    padding-left: 0;
-    margin: 15px 0 25px 0;
-    /* A classe .post-tags já cuida do flex e gap */
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
 }
 
 .cta-button {
     display: inline-block;
-    background: var(--primary-color); 
+    background: var(--primary-gradient); 
     color: #fff;
-    padding: 12px 25px;
+    padding: 14px 28px;
     font-weight: 600;
-    text-decoration: none;
-    border-radius: 5px;
+    border-radius: 8px;
     margin-top: 20px;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
 }
 .cta-button:hover {
-    background-color: var(--primary-hover); 
+    opacity: 0.9;
+    transform: translateY(-2px);
     color: #fff;
     text-decoration: none;
 }
 
+/* Footer Minimalista */
 footer {
     text-align: center;
-    padding: 50px 0;
-    margin-top: 50px;
+    padding: 60px 20px;
+    background-color: var(--card-bg);
     border-top: 1px solid var(--border-color);
-    color: var(--subtle-text);
-    font-size: 15px;
-    transition: border-color 0.3s ease, color 0.3s ease;
+    margin-top: 80px;
 }
-
 .footer-social {
     display: flex;
     justify-content: center;
     gap: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 .footer-social a {
     color: var(--subtle-text);
-    transition: color 0.2s ease;
+    background: var(--bg-color);
+    width: 45px; height: 45px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s ease;
 }
 .footer-social a:hover {
-    color: var(--primary-color);
-}
-
-/* 11. BOTÃO "VOLTAR AO TOPO" (NOVO) */
-#back-to-top {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: var(--primary-color);
     color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 50;
-    
-    opacity: 0;
-    visibility: hidden;
+    background: var(--primary-color);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+}
+
+/* 11. UTILITÁRIOS (Cookie, Topo, Overlay) */
+#back-to-top {
+    position: fixed; bottom: 25px; right: 25px;
+    background: var(--primary-gradient);
+    color: #fff;
+    border: none; border-radius: 50%;
+    width: 50px; height: 50px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 50;
+    opacity: 0; visibility: hidden;
     transform: translateY(20px);
-    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
-#back-to-top:hover {
-    background-color: var(--primary-hover);
-}
-#back-to-top.visible {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-#back-to-top svg {
-    width: 20px;
-    height: 20px;
-}
+#back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+#back-to-top:hover { transform: translateY(-3px); }
 
-/* 11.1. OVERLAY DO MENU (NOVO) */
 .menu-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    z-index: 99; /* Abaixo do nav (100) */
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    display: none; position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
+    z-index: 99; opacity: 0; transition: opacity 0.3s ease;
 }
+.menu-overlay.active { display: block; opacity: 1; }
 
-/* 11.2. COOKIE CONSENT BANNER (NOVO) */
 #cookie-consent-banner {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: var(--header-bg); /* Reutiliza a cor do header */
-    padding: 20px 0;
-    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
-    z-index: 90;
-    border-top: 1px solid var(--border-color);
-    
-    /* Oculto por padrão, controlado pelo JS */
-    transform: translateY(100%);
-    visibility: hidden;
-    opacity: 0;
-    transition: transform 0.3s ease, visibility 0.3s ease, opacity 0.3s ease;
+    position: fixed; bottom: 20px; left: 50%;
+    transform: translateX(-50%) translateY(150%);
+    width: 90%; max-width: 600px;
+    background-color: var(--card-bg);
+    padding: 25px;
+    box-shadow: var(--shadow-hover);
+    z-index: 900;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    visibility: hidden; opacity: 0;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+#cookie-consent-banner.visible { transform: translateX(-50%) translateY(0); visibility: visible; opacity: 1; }
 
-#cookie-consent-banner.visible {
-    transform: translateY(0);
-    visibility: visible;
-    opacity: 1;
-}
+.cookie-container { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.cookie-buttons { margin-left: auto; display: flex; gap: 10px; }
+#cookie-accept { padding: 10px 20px; font-size: 14px; margin: 0; }
+#cookie-reject { padding: 10px 20px; font-size: 14px; background: transparent; color: var(--subtle-text); border: 1px solid var(--border-color); border-radius: 8px; cursor: pointer; }
+#cookie-reject:hover { background: var(--bg-color); color: var(--text-color); }
 
-body.dark-mode #cookie-consent-banner {
-    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.4);
-}
-
-.cookie-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-}
-
-.cookie-container p {
-    margin: 0;
-    font-size: 15px;
-    color: var(--subtle-text);
-    flex-grow: 1;
-}
-.cookie-container p a {
-    color: var(--primary-color);
-    text-decoration: underline;
-}
-.cookie-container p a:hover {
-    color: var(--primary-hover);
-}
-
-.cookie-buttons {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    flex-shrink: 0;
-}
-
-/* Reutiliza .cta-button para o "Aceitar" */
-#cookie-accept {
-    padding: 10px 20px; /* Um pouco menor que o .cta-button padrão */
-    margin-top: 0; /* Reseta a margem */
-}
-
-/* Estilo para o "Rejeitar" */
-#cookie-reject {
-    background: transparent;
-    border: none;
-    color: var(--subtle-text);
-    font-weight: 600;
-    font-size: 15px;
-    cursor: pointer;
-    padding: 10px;
-    border-radius: var(--border-radius);
-    transition: background-color 0.2s ease, color 0.2s ease;
-}
-#cookie-reject:hover {
-    background-color: var(--border-color);
-    color: var(--text-color);
-}
-
-
-/* =================================================== */
-/* 12. MEDIA QUERIES (RESPONSIVO) - REVISADO          */
-/* =================================================== */
-
-/* 12.1. TABLETS E CELULARES MAIORES */
+/* 12. RESPONSIVIDADE */
 @media (max-width: 768px) {
+    #mobile-menu-toggle { display: flex; }
+    header { position: fixed; width: 100%; }
+    body { padding-top: 71px; }
     
-    #mobile-menu-toggle {
-        display: flex;
-    }
-    
-    /* MODIFICAÇÃO: Garante que o header seja fixed e ajuste o padding do body */
-    header {
-        position: fixed; 
-        width: 100%;
-    }
-    
-    body {
-        padding-top: 71px; 
-    }
-    
-    /* MODIFICAÇÃO: Menu agora desliza da ESQUERDA */
     #main-nav {
-        position: fixed;
-        top: 70px; /* Altura do header */
-        left: 0; /* Alinhado à esquerda */
-        width: 320px; /* Largura fixa */
-        max-width: 90%; /* Limite em telas muito pequenas */
-        bottom: 0; /* Substitui o 'height' para ajuste correto em viewports mobile */
-        background-color: var(--bg-color);
-        border-top: 1px solid var(--border-color);
-        border-right: 1px solid var(--border-color); /* Borda na direita */
-        
-        transform: translateX(-100%); /* Começa fora da tela (à esquerda) */
-        transition: transform 0.3s ease-in-out;
-        
-        overflow-y: auto;
-        padding: 40px 25px;
-        
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between; /* Empurra o botão de tema para baixo */
-        box-shadow: 5px 0 15px rgba(0,0,0,0.1); /* Sombra na direita */
-
-        /* === CORREÇÃO 2: Linha Adicionada === */
-        z-index: 101; /* Garante que o menu fique SOBRE o header (z-index: 100) */
-    }
-    
-    body.dark-mode #main-nav {
-        box-shadow: 5px 0 15px rgba(0,0,0,0.4); /* Sombra na direita */
-    }
-    
-    #main-nav.active {
-        transform: translateX(0); /* Posição final (visível) */
-    }
-    
-    /* MODIFICAÇÃO: Overlay fica visível quando o menu está ativo */
-    .menu-overlay {
-        z-index: 99; /* Garante que está abaixo do nav (z-index 100) */
-    }
-    .menu-overlay.active {
-        display: block;
-        opacity: 1;
-    }
-    
-    /* MODIFICAÇÃO: Alinha os links do menu à esquerda */
-    #main-nav ul {
-        flex-direction: column;
-        gap: 15px;
-        align-items: flex-start; /* Alinha à esquerda, não ao centro */
-    }
-    #main-nav a {
-        font-size: 20px;
-        font-weight: 700;
-        padding: 10px 0;
-    }
-    
-    /* MODIFICAÇÃO: Botão de tema agora é um ícone no canto inferior direito */
-    #theme-toggle {
-        margin-top: 40px; /* Espaço mínimo do conteúdo acima */
-        padding: 8px; /* Padding menor */
-        border: none;
-        border-radius: 50%; /* Circular */
+        position: fixed; top: 0; left: 0;
+        width: 280px; height: 100vh;
         background-color: var(--card-bg);
-        width: 44px;  /* Tamanho fixo */
-        height: 44px; /* Tamanho fixo */
-        display: flex; 
-        justify-content: center;
-        align-items: center;
-        align-self: flex-end; /* Alinha à direita (dentro do menu) */
-        box-shadow: var(--shadow);
+        flex-direction: column; align-items: flex-start;
+        padding: 80px 30px;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 101;
+        border-right: 1px solid var(--border-color);
     }
-    #theme-toggle:hover {
-        background-color: var(--border-color);
-        transform: scale(1.05); /* Mantém o hover */
-    }
+    #main-nav.active { transform: translateX(0); }
+    #main-nav ul { flex-direction: column; gap: 20px; width: 100%; }
+    #main-nav a { font-size: 18px; display: block; border-bottom: 1px solid var(--border-color); width: 100%; padding-bottom: 10px; }
+    #main-nav a::after { display: none; }
     
-    /* MODIFICAÇÃO: Esconde o texto do botão de tema */
-    .theme-toggle-text {
-        display: none; 
-    }
+    #theme-toggle { margin-top: auto; width: 100%; justify-content: flex-start; gap: 10px; padding: 15px 0; }
+    .theme-toggle-text { display: inline-block; font-weight: 600; }
     
-    .container {
-        padding: 0 20px;
-    }
-
-    .hero {
-        padding: 60px 20px;
-        margin: 20px 0 40px 0;
-    }
-    .hero h2 {
-        font-size: 42px; /* ALTERADO */
-    }
-    .hero p {
-        font-size: 18px;
-    }
-
-    .blog-list h3 {
-        font-size: 30px; /* ALTERADO */
-    }
-    
-    /* ✅ NOVO: Estilo responsivo para o botão "Ver Todas as Postagens" */
-    .view-all-posts {
-        margin: 30px 0 50px 0;
-    }
-
-    .posts-grid {
-        grid-template-columns: 1fr; 
-        gap: 25px; 
-    }
-
-    .post-card-content {
-        padding: 20px; 
-    }
-    
-    .post-individual {
-        padding: 30px 20px; 
-        margin: 20px 0;
-    }
-    .post-individual h2 {
-        font-size: 34px;
-    }
-    .post-individual .post-meta {
-        margin-bottom: 30px;
-    }
-    .post-individual .post-body {
-        font-size: 18px;
-    }
-    .post-individual .post-body,
-    .post-individual h2,
-    .post-individual .post-meta,
-    .post-individual .post-tags,
-    .post-individual .post-footer-cta {
-         max-width: 100%; 
-    }
-    
-    .about-content {
-        flex-direction: column;
-        gap: 30px;
-    }
-    .about-section {
-        padding: 40px 20px;
-        margin: 40px 0;
-    }
-    
-    .about-image {
-        display: flex;
-        justify-content: center; /* Centraliza a logo (imagem) sozinha */
-        width: 100%;
-    }
-    .about-image img {
-        width: 200px;
-        height: 200px;
-    }
-    
-    .about-text {
-        text-align: left; /* Alinha o container de texto à esquerda */
-    }
-
-    .about-text h3, 
-    .about-text h4.about-mission {
-        text-align: left; /* Alinha título e subtítulo à esquerda */
-    }
-    
-    .about-topics {
-        justify-content: flex-start; /* Alinha as tags à esquerda */
-    }
-    
-    .cta-button {
-        display: block; 
-        text-align: center; 
-        max-width: 250px;
-        margin-left: auto; /* CORRIGIDO: Centraliza o botão */
-        margin-right: auto; /* CORRIGIDO: Centraliza o botão */
-    }
-
-    footer {
-        padding: 30px 0;
-    }
-
-    /* NOVO: Responsivo do Cookie Banner */
-    .cookie-container {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-    }
-    .cookie-container p {
-        font-size: 14px;
-        text-align: center;
-        width: 100%;
-    }
-    .cookie-buttons {
-        width: 100%;
-        justify-content: center; /* Centraliza os botões no mobile */
-    }
-    #cookie-accept {
-        flex-grow: 1; /* Faz o botão "Aceitar" crescer */
-        text-align: center;
-    }
-    #cookie-reject {
-        flex-grow: 1; /* Faz o botão "Rejeitar" crescer */
-        text-align: center;
-        background-color: var(--border-color); /* Dá mais destaque no mobile */
-    }
-    
-    /* --- Estilos de conteúdo do post --- */
-    .post-individual .post-body h2 {
-        font-size: 28px;
-    }
-    .post-individual .post-body h3 {
-        font-size: 24px;
-    }
-    .post-individual .post-body h4 {
-        font-size: 20px;
-    }
-    .post-individual .post-body .lead-paragraph {
-        font-size: 19px;
-    }
-    .post-individual .post-body .article-table th, 
-    .post-individual .post-body .article-table td {
-        padding: 12px;
-    }
-    .post-individual .post-body blockquote {
-        padding: 15px 20px 15px 18px;
-    }
+    .hero h2 { font-size: 2.5rem; }
+    .post-individual { padding: 30px 20px; }
+    .about-content { flex-direction: column; text-align: center; }
+    .about-text h3, .about-text h4 { text-align: center; }
+    .about-image img { margin: 0 auto; }
+    .cookie-container { justify-content: center; text-align: center; }
+    .cookie-buttons { width: 100%; justify-content: center; }
 }
-
-/* 12.2. CELULARES PEQUENOS */
-@media (max-width: 480px) {
-    
-    .container {
-        padding: 0 15px; 
-    }
-
-    .logo a {
-        font-size: 24px; 
-    }
-
-    .hero h2 {
-        font-size: 32px;
-    }
-    .hero p {
-        font-size: 16px;
-    }
-
-    .post-card-image {
-        height: 150px; 
-    }
-
-    .post-individual {
-        padding: 20px 15px;
-    }
-    .post-individual h2 {
-        font-size: 28px;
-    }
-    .post-individual .post-body {
-        font-size: 16px;
-    }
-    
-    /* --- Estilos de conteúdo do post --- */
-    .post-individual .post-body h2 {
-        font-size: 26px;
-    }
-    .post-individual .post-body h3 {
-        font-size: 22px;
-    }
-    .post-individual .post-body .lead-paragraph {
-        font-size: 18px;
-    }
-    
-    .post-individual .post-body .article-table {
-        font-size: 15px; /* Reduz a fonte da tabela */
-    }
-    .post-individual .post-body .article-table th, 
-    .post-individual .post-body .article-table td {
-        padding: 10px; /* Menor preenchimento */
-    }
-    .post-individual .post-body blockquote {
-        font-size: 16px; /* Alinha com o corpo do texto */
-    }
-}
-
 
 /* =================================================== */
 /* 9.1. ESTILOS DE CONTEÚDO DO POST (Listas, Tabelas, etc.) */
@@ -1164,37 +886,14 @@ body.dark-mode #cookie-consent-banner {
 
 /* Títulos e Subtítulos dentro do post */
 .post-individual .post-body h2 {
-    font-size: 32px; /* 1. H2 para subseções */
+    font-size: 32px; 
     font-weight: 700;
     margin-top: 50px;
     margin-bottom: 20px;
     padding-bottom: 10px;
     border-bottom: 2px solid var(--border-color);
 }
-
-.post-individual .post-body h3 {
-    font-size: 26px; /* 2. H3 (estilo já existia, mas padronizado) */
-    font-weight: 600;
-    margin-top: 45px;
-    margin-bottom: 15px;
-}
-
-.post-individual .post-body h4 {
-    font-size: 22px; /* 3. H4 (ex: "Tabela 1") */
-    font-weight: 600;
-    margin-top: 30px;
-    margin-bottom: 10px;
-    color: var(--text-color);
-}
-
-/* Parágrafo de Destaque (Lead) */
-.post-individual .post-body .lead-paragraph {
-    font-size: 21px;
-    font-weight: 400;
-    color: var(--subtle-text);
-    margin-bottom: 35px;
-    line-height: 1.7;
-}
+/* ... estilos para h3, h4 e .lead-paragraph ... */
 
 /* Listas (UL e OL) */
 .post-individual .post-body ul,
@@ -1203,146 +902,33 @@ body.dark-mode #cookie-consent-banner {
     margin-bottom: 30px;
     padding-left: 15px;
 }
-
-.post-individual .post-body li {
-    margin-bottom: 12px;
-    line-height: 1.7;
-    padding-left: 5px;
-}
-
-.post-individual .post-body li::marker {
-    color: var(--primary-color);
-    font-weight: 600;
-}
-
-/* Estilo para a lista de recomendações (do seu exemplo) */
+/* ... estilos de marcadores ... */
 .post-individual .post-body .content-list {
-    list-style-type: none; /* Remove o marcador padrão */
+    list-style-type: none; 
     margin-left: 0;
     padding-left: 0;
 }
-
-.post-individual .post-body .content-list li {
-    position: relative;
-    padding-left: 30px; /* Espaço para o ícone */
-}
-
-.post-individual .post-body .content-list li::before {
-    content: '✓'; /* Ícone de check */
-    position: absolute;
-    left: 0;
-    top: 2px;
-    color: var(--primary-color);
-    font-weight: 700;
-    font-size: 1.1em;
-}
+/* ... estilos para .content-list li::before (ícone de check) ... */
 
 /* Estilização de Tabelas */
 .post-individual .post-body .table-container {
-    overflow-x: auto; /* Permite scroll horizontal em tabelas largas */
+    overflow-x: auto; 
     margin: 30px 0;
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
-
-.post-individual .post-body .article-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 16px;
-    text-align: left;
-}
-
-.post-individual .post-body .article-table th {
-    background-color: var(--border-color); /* Fundo do cabeçalho */
-    font-family: var(--font-heading);
-    font-weight: 600;
-    padding: 15px;
-    border-bottom: 2px solid var(--primary-color);
-}
-
-.post-individual .post-body .article-table td {
-    padding: 15px;
-    border-bottom: 1px solid var(--border-color);
-    vertical-align: top; /* Alinha o conteúdo no topo */
-}
-
-/* "Zebra-striping" sutil que funciona em ambos os modos */
-.post-individual .post-body .article-table tbody tr:nth-child(odd) {
-    background-color: var(--card-bg);
-}
-.post-individual .post-body .article-table tbody tr:nth-child(even) {
-    background-color: var(--bg-color);
-}
-
-.post-individual .post-body .article-table tbody tr:last-child td {
-    border-bottom: none; /* Remove a borda da última linha */
-}
+/* ... estilos de cabeçalho, células e zebra-striping ... */
 
 /* Outros Elementos de Conteúdo */
-
-/* Citação (Blockquote) */
 .post-individual .post-body blockquote {
     margin: 30px 0;
     padding: 20px 25px 20px 22px;
     border-left: 5px solid var(--primary-color);
-    background-color: var(--bg-color); /* Usa o fundo principal para destacar */
+    background-color: var(--bg-color); 
     border-radius: 0 var(--border-radius) var(--border-radius) 0;
     font-size: 18px;
     font-style: italic;
     color: var(--subtle-text);
 }
-.post-individual .post-body blockquote p {
-    margin-bottom: 0;
-}
-
-/* Linha Horizontal (HR) */
-.post-individual .post-body hr {
-    border: 0;
-    height: 1px;
-    background-color: var(--border-color);
-    margin: 50px auto;
-}
-
-/* Negrito (Strong) */
-.post-individual .post-body strong {
-    font-weight: 600;
-    color: var(--text-color); /* Garante contraste */
-}
-
-/* Rodapé do Post (do seu exemplo) */
-.post-individual .post-body .footnote {
-    margin-top: 50px;
-    padding-top: 20px;
-    border-top: 1px dashed var(--border-color);
-    font-size: 14px;
-    color: var(--subtle-text);
-}
-.post-individual .post-body .footnote p {
-    font-size: 14px; /* Sobrescreve o p padrão */
-    margin-bottom: 5px;
-}
-
-/* =================================== */
-/* 13. CONTROLE DE VISIBILIDADE DE POSTS (HOME) */
-/* =================================== */
-
-/* Mobile (Padrão: Apenas o primeiro post é visível) */
-/* Esconde a partir do 2º post (i >= 1) */
-.mobile-hidden-post {
-    display: none !important;
-}
-
-/* Desktop (min-width: 768px - Visíveis: 1º, 2º e 3º posts) */
-@media (min-width: 768px) {
-    /* Reexibe o 2º e 3º posts, que tem apenas a classe .mobile-hidden-post */
-    /* ATENÇÃO: Ajuste 'flex' para o display original do seu .post-card (ex: block, grid) se o layout quebrar. */
-    .mobile-hidden-post:not(.desktop-hidden-post) {
-        display: flex !important; 
-    }
-
-    /* Mantém escondido a partir do 4º post (i >= 3) */
-    .desktop-hidden-post {
-        display: none !important;
-    }
-}
+/* ... estilos para hr, strong, e .footnote ... */

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SpectroTech</title>
+    <title>SpectroTech | Futuro Digital</title>
     
     <link rel="icon" type="image/png" href="favicon.png"> 
     <meta name="description" content="Além da Notícia. Profundidade e Dicas no seu Mundo Digital.">
@@ -16,18 +16,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <script>
-  // Define dataLayer e a função gtag
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-
-  // ✅ ADICIONADO: Define o estado de consentimento padrão como 'negado'
-  gtag('consent', 'default', {
-    'analytics_storage': 'denied'
-  });
+  gtag('consent', 'default', { 'analytics_storage': 'denied' });
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZC10VQ7LXQ"></script>
 <script>
-  // Configuração (não enviará dados até o consentimento)
   gtag('js', new Date());
   gtag('config', 'G-ZC10VQ7LXQ');
 </script>
@@ -58,60 +52,63 @@
         </div>
     </header>
 
-    <main class="container">
     <section class="hero">
-        <h2>Domine o Digital com Informação de Ponta.</h2>
-        <p>De sistemas a gadgets, nosso foco é aprofundar, simplificar e te dar o conhecimento que faz a diferença no dia a dia.</p>
+        <div class="hero-bg-grid"></div> <div class="container"> <div class="hero-content">
+                <span class="hero-badge">Explorar o Futuro</span>
+                <h2>Domine o Digital com <br> <span class="text-gradient">Informação de Ponta.</span></h2>
+                <p>De sistemas a gadgets, nosso foco é aprofundar, simplificar e te dar o conhecimento que faz a diferença no dia a dia.</p>
+                
+                <div class="hero-actions">
+                    <a href="posts.html" class="cta-button">Ler Últimos Artigos</a>
+                </div>
+            </div>
+        </div>
     </section>
 
+    <main class="container">
         <section class="blog-list">
             <h3>Últimas Postagens</h3>
 
             <div id="posts-container" class="posts-grid" data-homepage="true">
-                
-                <div class="skeleton-card" aria-label="Carregando Conteúdo">
+                <div class="skeleton-card">
                     <div class="skeleton-image"></div>
                     <div class="skeleton-text"></div>
                     <div class="skeleton-text short"></div>
                 </div>
-                <div class="skeleton-card" aria-label="Carregando Conteúdo">
+                <div class="skeleton-card">
                     <div class="skeleton-image"></div>
                     <div class="skeleton-text"></div>
                     <div class="skeleton-text short"></div>
                 </div>
-                <div class="skeleton-card" aria-label="Carregando Conteúdo">
+                <div class="skeleton-card">
                     <div class="skeleton-image"></div>
                     <div class="skeleton-text"></div>
                     <div class="skeleton-text short"></div>
                 </div>
-                
             </div>
             
             <div class="view-all-posts">
-                <a href="posts.html" class="cta-button">Ver Todas as Postagens</a>
+                <a href="posts.html" class="cta-button outline">Ver Todas as Postagens</a>
             </div>
-            
         </section>
         
         <section id="about" class="about-section">
-            <div class="container">
-                <div class="about-content">
-                    <div class="about-image">
-                        <img src="logo.png" alt="Logo da SpectroTech">
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="logo.png" alt="Logo da SpectroTech">
+                </div>
+                <div class="about-text">
+                    <h3>Sobre a SpectroTech</h3> 
+                    <h4 class="about-mission">Nossa Missão: Além das Manchetes</h4>
+                    <p>A SpectroTech é o seu portal de referência para desvendar todo o espectro do universo tecnológico. Nossa missão é ir além das manchetes, oferecendo uma cobertura profunda e analítica.</p>
+                    <p>Nossas principais editorias:</p>
+                    <div class="post-tags about-topics">
+                        <span class="tag">Sistemas Operacionais</span>
+                        <span class="tag">Desenvolvimento Web</span>
+                        <span class="tag">Hardware & Gadgets</span>
+                        <span class="tag">Segurança Digital</span>
                     </div>
-                    <div class="about-text">
-                        <h3>Sobre a SpectroTech</h3> 
-                        <h4 class="about-mission">Nossa Missão: Além das Manchetes</h4>
-                        <p>A SpectroTech é o seu portal de referência para desvendar todo o espectro do universo tecnológico. Nossa missão é ir além das manchetes, oferecendo uma cobertura profunda e analítica.</p>
-                        <p>Nossas principais editorias:</p>
-                        <div class="post-tags about-topics">
-                            <span class="tag">Sistemas Operacionais</span>
-                            <span class="tag">Desenvolvimento Web</span>
-                            <span class="tag">Hardware & Gadgets</span>
-                            <span class="tag">Segurança Digital</span>
-                        </div>
-                        <a href="https://github.com/PixelLabNI/SpectroTech" class="cta-button">Saiba Mais</a>
-                    </div>
+                    <a href="https://github.com/PixelLabNI/SpectroTech" class="cta-button small">GitHub do Projeto</a>
                 </div>
             </div>
         </section>
@@ -119,18 +116,18 @@
 
     <footer>
         <div class="footer-social">
-            <a href="https://www.youtube.com/@pixellabni" target="_blank" aria-label="Canal no YouTube"><i data-feather="youtube"></i></a>
-            <a href="https://github.com/PixelLabNI" target="_blank" aria-label="Perfil no GitHun"><i data-feather="github"></i></a>
-            <a href="https://www.instagram.com/pixellabni/" target="_blank" aria-label="Perfil no Instagram"><i data-feather="instagram"></i></a>
+            <a href="https://www.youtube.com/@pixellabni" target="_blank" aria-label="YouTube"><i data-feather="youtube"></i></a>
+            <a href="https://github.com/PixelLabNI" target="_blank" aria-label="GitHub"><i data-feather="github"></i></a>
+            <a href="https://www.instagram.com/pixellabni/" target="_blank" aria-label="Instagram"><i data-feather="instagram"></i></a>
         </div>
         <p>SpectroTech | <a href="https://pixellabni.github.io/website/">Pixel Lab NI</a></p>
     </footer>
 
     <div id="cookie-consent-banner">
         <div class="container cookie-container">
-            <p>Usamos cookies (do Google Analytics) para entender como você usa nosso site e melhorar sua experiência. <a href="https://policies.google.com/technologies/cookies" target="_blank" rel="noopener noreferrer">Saiba mais</a>.</p>
+            <p>Usamos cookies para melhorar sua experiência. <a href="#" target="_blank">Saiba mais</a>.</p>
             <div class="cookie-buttons">
-                <button id="cookie-accept" class="cta-button">Aceitar</button>
+                <button id="cookie-accept" class="cta-button small">Aceitar</button>
                 <button id="cookie-reject">Rejeitar</button>
             </div>
         </div>
@@ -142,11 +139,7 @@
         <i data-feather="arrow-up"></i>
     </button>
 
-    <script>
-      feather.replace()
-    </script>
-    
+    <script>feather.replace()</script>
     <script type="module" src="app.js"></script>
-
 </body>
 </html>
