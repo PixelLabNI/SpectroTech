@@ -12,53 +12,51 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
     
     <script src="https://unpkg.com/feather-icons"></script>
-
     <link rel="stylesheet" href="admin-style.css"> 
 </head>
 <script>
-  // Define dataLayer e a função gtag
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-
-  // ✅ ADICIONADO: Define o estado de consentimento padrão como 'negado'
-  gtag('consent', 'default', {
-    'analytics_storage': 'denied'
-  });
-</script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZC10VQ7LXQ"></script>
-<script>
-  // Configuração (não enviará dados até o consentimento)
-  gtag('js', new Date());
-  gtag('config', 'G-ZC10VQ7LXQ');
+  gtag('consent', 'default', { 'analytics_storage': 'denied' });
 </script>
 <body>
+    <div class="bg-decoration"></div>
 
     <header>
         <div class="nav-container">
-            <h1 class="logo"><a href="admin.html">SpectroTech<span> Dashboard</span></a></h1>
-            <div id="auth-info" class="user-info" style="display: none;">
-                <span id="user-email"></span>
-                <button id="logout-btn" class="btn btn-secondary btn-icon-only" aria-label="Sair">
-                    <i data-feather="log-out"></i>
+            <h1 class="logo"><a href="admin.html">SpectroTech<span> Admin</span></a></h1>
+            
+            <div class="header-actions">
+                <button id="theme-toggle" aria-label="Alternar Tema">
+                    <i data-feather="sun" class="icon-sun"></i>
+                    <i data-feather="moon" class="icon-moon"></i>
                 </button>
+
+                <div id="auth-info" class="user-info" style="display: none;">
+                    <span id="user-email"></span>
+                    <button id="logout-btn" class="btn btn-secondary btn-icon-only" aria-label="Sair">
+                        <i data-feather="log-out"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </header>
 
     <main class="container">
         
-        <section id="login-section" class="auth-box">
+        <section id="login-section" class="auth-box glass-card">
             <h2>Acesso Restrito</h2>
+            <p class="auth-subtitle">Gerenciamento de Conteúdo</p>
             <form id="login-form">
                 <div class="form-group">
-                    <label for="email">E-mail:</label>
-                    <input type="email" id="email" required>
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" placeholder="admin@spectrotech.com" required>
                 </div>
                 <div class="form-group">
-                    <label for="password">Senha:</label>
-                    <input type="password" id="password" required>
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
                 </div>
-                <button type="submit" class="btn btn-primary btn-full-width">Entrar</button>
+                <button type="submit" class="btn btn-primary btn-full-width">Entrar no Painel</button>
                 <p id="login-error" class="error-message"></p>
             </form>
         </section>
@@ -67,70 +65,84 @@
 
         <section id="dashboard-section" style="display: none;">
             
-            <div class="toolbar">
-                <h2>Gerenciamento de Conteúdo</h2>
-                <button id="new-post-btn" class="btn btn-success">
-                    <i data-feather="plus-circle"></i> Novo Post
+            <div class="toolbar glass-card">
+                <div class="toolbar-header">
+                    <h2>Posts</h2>
+                    <span class="badge" id="total-posts-badge">Gerenciamento</span>
+                </div>
+                <button id="new-post-btn" class="btn btn-primary">
+                    <i data-feather="plus"></i> Novo Post
                 </button>
             </div>
 
-            <div id="posts-list" class="posts-list-wrapper">
+            <div id="posts-list" class="posts-list-wrapper glass-card">
                 </div>
 
             <aside id="post-editor" class="editor-modal">
-                <div class="editor-content">
-                    <h3><span id="editor-title">Adicionar Novo Post</span></h3>
+                <div class="editor-content glass-card">
+                    <div class="editor-header">
+                        <h3><span id="editor-title">Novo Post</span></h3>
+                        <button class="btn-close" id="cancel-edit-btn"><i data-feather="x"></i></button>
+                    </div>
+                    
                     <form id="post-form">
                         <input type="hidden" id="post-id-hidden">
                         
-                        <div class="form-group">
-                            <label for="post-title">Título:</label>
-                            <input type="text" id="post-title" required>
+                        <div class="form-grid">
+                            <div class="form-group full-width">
+                                <label for="post-title">Título do Artigo</label>
+                                <input type="text" id="post-title" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="post-category">Categoria</label>
+                                <select id="post-category" required>
+                                    <option value="Geral">Geral</option>
+                                    <option value="Sistemas Operacionais">Sistemas Operacionais</option>
+                                    <option value="Desenvolvimento Web">Desenvolvimento Web</option>
+                                    <option value="Hardware & Gadgets">Hardware & Gadgets</option>
+                                    <option value="Segurança Digital">Segurança Digital</option>
+                                    <option value="Games">Games</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="post-snippet">Descrição Curta</label>
+                                <input type="text" id="post-snippet" required maxlength="150" placeholder="Resumo para o card (máx 150 chars)">
+                            </div>
                         </div>
                         
                         <div class="form-group">
-                            <label for="post-snippet">Descrição Curta (Snippet):</label>
-                            <input type="text" id="post-snippet" required maxlength="150">
-                            <small>Máximo 150 caracteres para exibição na lista do blog.</small>
+                            <label for="post-content">Conteúdo (HTML)</label>
+                            <textarea id="post-content" rows="12" required placeholder="Use tags HTML (<p>, <h3>, <ul>) para formatar o texto."></textarea>
                         </div>
                         
-                        <div class="form-group">
-                            <label for="post-category">Categoria:</label>
-                            <select id="post-category" required>
-                                <option value="Geral">Geral</option>
-                                <option value="Sistemas Operacionais">Sistemas Operacionais</option>
-                                <option value="Desenvolvimento Web">Desenvolvimento Web</option>
-                                <option value="Hardware & Gadgets">Hardware & Gadgets</option>
-                                <option value="Segurança Digital">Segurança Digital</option>
-                                <option value="Games">Games</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="post-content">Conteúdo (HTML):</label>
-                            <textarea id="post-content" rows="15" required placeholder="Use tags HTML (p, h3, ul, ol) para formatar o texto."></textarea>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="post-thumbnail">URL da Imagem (Thumbnail):</label>
-                            <input type="url" id="post-thumbnail" placeholder="Ex: https://dominio.com/imagem.jpg">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="post-youtube">URL do Embed do YouTube:</label>
-                            <input type="url" id="post-youtube" placeholder="Ex: https://www.youtube.com/embed/XXXXXX">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="post-thumbnail">URL da Thumbnail</label>
+                                <input type="url" id="post-thumbnail" placeholder="https://...">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="post-youtube">Embed do YouTube (Opcional)</label>
+                                <input type="url" id="post-youtube" placeholder="https://www.youtube.com/embed/...">
+                            </div>
                         </div>
 
-                        <div class="form-group checkbox-group">
-                            <input type="checkbox" id="post-published" checked>
-                            <label for="post-published">Publicado (visível no blog)</label>
-                        </div>
-                        <div class="editor-actions">
-                            <button type="submit" class="btn btn-primary" id="save-post-btn">Salvar Post</button>
-                            <button type="button" class="btn btn-secondary" id="cancel-edit-btn">Cancelar</button>
-                            <button type="button" class="btn btn-danger" id="delete-post-btn" style="display: none;">
-                                <i data-feather="trash-2"></i> Excluir
-                            </button>
+                        <div class="form-footer">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" id="post-published" checked>
+                                <label for="post-published">Publicar Imediatamente</label>
+                            </div>
+
+                            <div class="editor-actions">
+                                <button type="button" class="btn btn-danger-outline" id="delete-post-btn" style="display: none;">
+                                    <i data-feather="trash-2"></i> Excluir
+                                </button>
+                                <button type="submit" class="btn btn-primary" id="save-post-btn">
+                                    <i data-feather="save"></i> Salvar Alterações
+                                </button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -145,7 +157,8 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
     
     <script type="module" src="app.js"></script> 
-    <script type="module" src="admin.js"></script> <script>
+    <script type="module" src="admin.js"></script>
+    <script>
         feather.replace()
     </script>
 </body>
