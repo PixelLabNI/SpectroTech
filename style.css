@@ -714,9 +714,10 @@ body.dark-mode .post-card-image.placeholder {
 .about-image img {
     position: relative;
     z-index: 1;
-    width: 500px;
-    height: 245px;
-    border-radius: 50%;
+    /* CORREÇÃO: Ajuste de tamanho e border-radius para não cortar a logo */
+    width: 250px; 
+    height: auto;
+    border-radius: var(--border-radius); 
     object-fit: cover;
     
     /* Borda dupla estilo vidro */
@@ -856,7 +857,8 @@ footer {
         width: 280px; height: 100vh;
         background-color: var(--card-bg);
         flex-direction: column; align-items: flex-start;
-        padding: 80px 30px;
+        /* CORREÇÃO: Adicionado padding inferior para mostrar o botão de tema */
+        padding: 80px 30px 40px 30px; 
         transform: translateX(-100%);
         transition: transform 0.3s ease;
         z-index: 101;
@@ -867,14 +869,28 @@ footer {
     #main-nav a { font-size: 18px; display: block; border-bottom: 1px solid var(--border-color); width: 100%; padding-bottom: 10px; }
     #main-nav a::after { display: none; }
     
-    #theme-toggle { margin-top: auto; width: 100%; justify-content: flex-start; gap: 10px; padding: 15px 0; }
+    #theme-toggle { 
+        margin-top: auto; 
+        width: 100%; 
+        justify-content: flex-start; 
+        gap: 10px; 
+        padding: 15px 0; 
+        /* CORREÇÃO: Margem inferior para afastar o botão da borda */
+        margin-bottom: 20px;
+    }
     .theme-toggle-text { display: inline-block; font-weight: 600; }
     
     .hero h2 { font-size: 2.5rem; }
     .post-individual { padding: 30px 20px; }
     .about-content { flex-direction: column; text-align: center; }
     .about-text h3, .about-text h4 { text-align: center; }
-    .about-image img { margin: 0 auto; }
+    .about-image img { 
+        margin: 0 auto; 
+        width: 180px; /* CORREÇÃO: Ajuste de tamanho para mobile */
+        height: auto;
+        border: none;
+        box-shadow: none;
+    }
     .cookie-container { justify-content: center; text-align: center; }
     .cookie-buttons { width: 100%; justify-content: center; }
 }
@@ -931,4 +947,3 @@ footer {
     font-style: italic;
     color: var(--subtle-text);
 }
-/* ... estilos para hr, strong, e .footnote ... */
