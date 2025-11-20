@@ -32,6 +32,21 @@ const auth = getAuth(app);
 
 console.log("SpectroTech Core Initialized.");
 
+// Helper: Formata Data (MOVIDO PARA CIMA E EXPORTADO)
+export function formatDate(timestamp, formatType = 'full') {
+    if (!timestamp?.toDate) return "";
+    
+    const options = formatType === 'short' 
+        ? { day: 'numeric', month: 'short', year: 'numeric' }
+        : { day: 'numeric', month: 'short', year: 'numeric' };
+
+    return timestamp.toDate().toLocaleDateString('pt-br', options);
+}
+
+// EXPORTAÇÕES PRINCIPAIS PARA USO EM OUTROS MÓDULOS (e.g., admin.js)
+// =================================================================
+export { db, auth, getFirestore, getAuth, collection, getDocs, getDoc, doc, query, orderBy, limit, where };
+
 
 // ===================================
 // 2. UI & THEME LOGIC
@@ -139,23 +154,18 @@ const postsContainer = document.getElementById('posts-container');
 const searchInputEl = document.getElementById('search-input');
 const categoryFilterEl = document.getElementById('category-filter');
 
-// Inicialização baseada na página
 document.addEventListener('DOMContentLoaded', () => {
+    // Verifica se estamos na página correta pela URL, não apenas pelo ID
+    const isPostPage = window.location.pathname.includes('post.html');
+
     if (postsContainer) {
         fetchBlogPosts();
         setupFilters();
-    } else if (document.getElementById('post-content')) {
+    } else if (document.getElementById('post-content') && isPostPage) { 
+        // Só executa se tiver o elemento E estiver na página post.html
         fetchSinglePost();
     }
 });
-
-// Helper: Formata Data
-function formatDate(timestamp) {
-    if (!timestamp?.toDate) return "";
-    return timestamp.toDate().toLocaleDateString('pt-br', {
-        day: 'numeric', month: 'short', year: 'numeric'
-    });
-}
 
 // Helper: Tempo de Leitura (Novo)
 function calculateReadingTime(text) {

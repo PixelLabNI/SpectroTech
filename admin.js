@@ -399,23 +399,3 @@ if (deletePostBtn) {
         }
     });
 }
-
-// ==============================================================================
-// 5. THEME TOGGLE (Adicionado para corresponder ao Design System)
-// ==============================================================================
-const themeToggle = document.getElementById('theme-toggle');
-const body = document.body;
-
-// Verifica preferência salva ou do sistema
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    body.classList.add('dark-mode');
-}
-
-if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
-        const isDark = body.classList.contains('dark-mode');
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    });
-}
