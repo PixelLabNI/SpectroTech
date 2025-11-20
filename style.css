@@ -857,12 +857,13 @@ footer {
         width: 280px; height: 100vh;
         background-color: var(--card-bg);
         flex-direction: column; align-items: flex-start;
-        /* CORREÇÃO: Adicionado padding inferior para mostrar o botão de tema */
-        padding: 80px 30px 40px 30px; 
+        /* CORREÇÃO APRIMORADA: Mais padding na parte inferior e overflow-y: auto */
+        padding: 80px 30px 60px 30px; 
         transform: translateX(-100%);
         transition: transform 0.3s ease;
         z-index: 101;
         border-right: 1px solid var(--border-color);
+        overflow-y: auto; 
     }
     #main-nav.active { transform: translateX(0); }
     #main-nav ul { flex-direction: column; gap: 20px; width: 100%; }
@@ -875,8 +876,8 @@ footer {
         justify-content: flex-start; 
         gap: 10px; 
         padding: 15px 0; 
-        /* CORREÇÃO: Margem inferior para afastar o botão da borda */
-        margin-bottom: 20px;
+        /* CORREÇÃO APRIMORADA: Remove margem, dependendo do padding do #main-nav */
+        margin-bottom: 0;
     }
     .theme-toggle-text { display: inline-block; font-weight: 600; }
     
@@ -886,8 +887,9 @@ footer {
     .about-text h3, .about-text h4 { text-align: center; }
     .about-image img { 
         margin: 0 auto; 
-        width: 180px; /* CORREÇÃO: Ajuste de tamanho para mobile */
+        width: 180px; 
         height: auto;
+        border-radius: var(--border-radius); /* Mantido o ajuste de border-radius */
         border: none;
         box-shadow: none;
     }
@@ -924,7 +926,6 @@ footer {
     margin-left: 0;
     padding-left: 0;
 }
-/* ... estilos para .content-list li::before (ícone de check) ... */
 
 /* Estilização de Tabelas */
 .post-individual .post-body .table-container {
@@ -934,7 +935,6 @@ footer {
     border-radius: var(--border-radius);
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
-/* ... estilos de cabeçalho, células e zebra-striping ... */
 
 /* Outros Elementos de Conteúdo */
 .post-individual .post-body blockquote {
