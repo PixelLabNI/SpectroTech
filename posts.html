@@ -3,54 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todos os Posts | SpectroTech</title>
+    <title>Todos os Artigos | SpectroTech</title>
     
     <link rel="icon" type="image/png" href="favicon.png"> 
-    <meta name="description" content="Além da Notícia. Profundidade e Dicas no seu Mundo Digital.">
+    <meta name="description" content="Navegue por todo o nosso acervo de artigos sobre tecnologia, desenvolvimento e hardware.">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/feather-icons"></script>
 
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="posts.css">
+    <link rel="stylesheet" href="style.css"> <link rel="stylesheet" href="posts.css"> <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', { 'analytics_storage': 'denied' });
+      gtag('js', new Date());
+      gtag('config', 'G-ZC10VQ7LXQ');
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZC10VQ7LXQ"></script>
 </head>
-<script>
-  // Define dataLayer e a função gtag
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-
-  // ✅ ADICIONADO: Define o estado de consentimento padrão como 'negado'
-  gtag('consent', 'default', {
-    'analytics_storage': 'denied'
-  });
-</script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZC10VQ7LXQ"></script>
-<script>
-  // Configuração (não enviará dados até o consentimento)
-  gtag('js', new Date());
-  gtag('config', 'G-ZC10VQ7LXQ');
-</script>
 <body>
 
     <header>
         <div class="container nav-container">
             <div class="nav-left">
-                <button id="mobile-menu-toggle" aria-label="Abrir menu" aria-expanded="false">
+                <button id="mobile-menu-toggle" aria-label="Abrir Menu">
                     <i data-feather="menu" class="icon-menu"></i>
                     <i data-feather="x" class="icon-close"></i>
                 </button>
+
                 <h1 class="logo"><a href="index.html">Spectro<span>Tech</span></a></h1>
             </div>
+            
             <nav id="main-nav">
                 <ul>
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="posts.html" class="active">Todos os Posts</a></li>
-                    <li><a href="index.html#about">Sobre Nós</a></li>
+                    <li><a href="index.html" class="active">Início</a></li>
+                    <li><a href="posts.html">Artigos</a></li>
+                    <li><a href="index.html#about">Sobre</a></li>
                 </ul>
                 
-                <button id="theme-toggle" aria-label="Alternar modo claro/escuro">
+                <button id="theme-toggle" aria-label="Alternar Tema">
                     <i data-feather="moon" class="icon-moon"></i>
                     <i data-feather="sun" class="icon-sun"></i>
                     <span class="theme-toggle-text">Alternar Tema</span> 
@@ -60,54 +52,78 @@
     </header>
 
     <main class="container">
-        <section class="main-posts posts-full-list" id="posts">
-            <h2>Todas as Postagens</h2>
+        
+        <section class="page-header">
+            <div class="header-content">
+                <h2>Explorar <span class="text-gradient">Conteúdo</span></h2>
+                <p>Navegue pela nossa biblioteca completa de tutoriais, análises e notícias.</p>
+            </div>
+            <div class="header-glow"></div>
+        </section>
 
-            <div class="filters-wrapper">
+        <section class="posts-full-list" id="posts">
+            
+            <div class="filters-wrapper sticky-filters">
                 <div class="search-container">
                     <i data-feather="search" class="search-icon"></i>
-                    <input type="search" id="search-input" placeholder="Buscar por título ou palavra-chave...">
+                    <input type="search" id="search-input" placeholder="O que você procura hoje? (Ex: React, Hardware...)">
                 </div>
                 
                 <div class="filter-container">
-                    <select id="category-filter" aria-label="Filtrar por categoria">
-                        <option value="all">Todas as Categorias</option>
-                        </select>
+                    <div class="select-wrapper">
+                        <i data-feather="filter" class="filter-icon-decor"></i>
+                        <select id="category-filter" aria-label="Filtrar por categoria">
+                            <option value="all">Todas as Categorias</option>
+                            </select>
+                        <i data-feather="chevron-down" class="arrow-icon-decor"></i>
+                    </div>
                 </div>
             </div>
             
-            <div id="posts-container" data-homepage="false">
+            <div id="posts-container" class="posts-grid" data-homepage="false">
+                <div class="skeleton-card">
+                    <div class="skeleton-image"></div>
+                    <div class="skeleton-text large"></div>
+                    <div class="skeleton-text short"></div>
                 </div>
-        </section>
-        
-        </main>
-
-    <div id="cookie-consent-banner">
-        <div class="container cookie-container">
-            <p>Usamos cookies (do Google Analytics) para entender como você usa nosso site e melhorar sua experiência. <a href="httpsa://policies.google.com/technologies/cookies" target="_blank" rel="noopener noreferrer">Saiba mais</a>.</p>
-            <div class="cookie-buttons">
-                <button id="cookie-accept" class="cta-button">Aceitar</button>
-                <button id="cookie-reject">Rejeitar</button>
+                <div class="skeleton-card">
+                    <div class="skeleton-image"></div>
+                    <div class="skeleton-text large"></div>
+                    <div class="skeleton-text short"></div>
+                </div>
+                <div class="skeleton-card">
+                    <div class="skeleton-image"></div>
+                    <div class="skeleton-text large"></div>
+                    <div class="skeleton-text short"></div>
+                </div>
             </div>
-        </div>
-    </div>
+
+        </section>
+    </main>
 
     <footer>
         <div class="footer-social">
-            <a href="https://www.youtube.com/@pixellabni" target="_blank" aria-label="Canal no YouTube"><i data-feather="youtube"></i></a>
-            <a href="https://github.com/PixelLabNI" target="_blank" aria-label="Perfil no GitHun"><i data-feather="github"></i></a>
-            <a href="https://www.instagram.com/pixellabni/" target="_blank" aria-label="Perfil no Instagram"><i data-feather="instagram"></i></a>
+            <a href="https://www.youtube.com/@pixellabni" target="_blank" aria-label="YouTube"><i data-feather="youtube"></i></a>
+            <a href="https://github.com/PixelLabNI" target="_blank" aria-label="GitHub"><i data-feather="github"></i></a>
+            <a href="https://www.instagram.com/pixellabni/" target="_blank" aria-label="Instagram"><i data-feather="instagram"></i></a>
         </div>
         <p>SpectroTech | <a href="https://pixellabni.github.io/website/">Pixel Lab NI</a></p>
     </footer>
 
-    <button id="back-to-top" aria-label="Voltar ao topo">
-        <i data-feather="arrow-up"></i>
-    </button>
+    <div id="cookie-consent-banner">
+        <div class="container cookie-container">
+            <p>Usamos cookies para melhorar sua experiência.</p>
+            <div class="cookie-buttons">
+                <button id="cookie-reject">Rejeitar</button>
+                <button id="cookie-accept" class="cta-button small">Aceitar</button>
+            </div>
+        </div>
+    </div>
 
-    <script>
-      feather.replace()
-    </script>
+    <div class="menu-overlay"></div>
+    <button id="back-to-top" aria-label="Voltar ao topo"><i data-feather="arrow-up"></i></button>
+
+    <script>feather.replace()</script>
     <script type="module" src="app.js"></script> 
 </body>
 </html>

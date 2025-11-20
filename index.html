@@ -3,47 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SpectroTech | Futuro Digital</title>
+    <title>SpectroTech | O Futuro da Tecnologia Digital</title>
+    <meta name="description" content="Domine o digital com informação de ponta. Análises profundas sobre sistemas, gadgets, dev e segurança.">
     
-    <link rel="icon" type="image/png" href="favicon.png"> 
-    <meta name="description" content="Além da Notícia. Profundidade e Dicas no seu Mundo Digital.">
+    <link rel="icon" type="image/png" href="favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
     
     <script src="https://unpkg.com/feather-icons"></script>
-
     <link rel="stylesheet" href="style.css">
+
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', { 'analytics_storage': 'denied' });
+      gtag('js', new Date());
+      gtag('config', 'G-ZC10VQ7LXQ');
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZC10VQ7LXQ"></script>
 </head>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('consent', 'default', { 'analytics_storage': 'denied' });
-</script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZC10VQ7LXQ"></script>
-<script>
-  gtag('js', new Date());
-  gtag('config', 'G-ZC10VQ7LXQ');
-</script>
 <body>
 
     <header>
         <div class="container nav-container">
             <div class="nav-left">
-                <button id="mobile-menu-toggle" aria-label="Abrir menu" aria-expanded="false">
+                <button id="mobile-menu-toggle" aria-label="Abrir Menu">
                     <i data-feather="menu" class="icon-menu"></i>
                     <i data-feather="x" class="icon-close"></i>
                 </button>
+
                 <h1 class="logo"><a href="index.html">Spectro<span>Tech</span></a></h1>
             </div>
+            
             <nav id="main-nav">
                 <ul>
-                    <li><a href="index.html" class="active">Inicio</a></li>
-                    <li><a href="posts.html">Todos os Posts</a></li>
-                    <li><a href="index.html#about">Sobre Nós</a></li>
+                    <li><a href="index.html" class="active">Início</a></li>
+                    <li><a href="posts.html">Artigos</a></li>
+                    <li><a href="index.html#about">Sobre</a></li>
                 </ul>
                 
-                <button id="theme-toggle" aria-label="Alternar modo claro/escuro">
+                <button id="theme-toggle" aria-label="Alternar Tema">
                     <i data-feather="moon" class="icon-moon"></i>
                     <i data-feather="sun" class="icon-sun"></i>
                     <span class="theme-toggle-text">Alternar Tema</span> 
@@ -53,63 +53,67 @@
     </header>
 
     <section class="hero">
-        <div class="hero-bg-grid"></div> <div class="container"> <div class="hero-content">
-                <span class="hero-badge">Explorar o Futuro</span>
-                <h2>Domine o Digital com <br> <span class="text-gradient">Informação de Ponta.</span></h2>
-                <p>De sistemas a gadgets, nosso foco é aprofundar, simplificar e te dar o conhecimento que faz a diferença no dia a dia.</p>
-                
-                <div class="hero-actions">
-                    <a href="posts.html" class="cta-button">Ler Últimos Artigos</a>
-                </div>
+        <div class="container hero-content">
+            <span class="hero-badge">Tech Insights</span>
+            <h2>Domine o Digital com <br><span class="text-gradient">Informação de Ponta.</span></h2>
+            <p>Mergulhe em análises profundas sobre desenvolvimento, hardware e o futuro da web. Sem ruído, apenas o essencial.</p>
+            
+            <div class="hero-actions">
+                <a href="posts.html" class="cta-button">Explorar Artigos</a>
             </div>
         </div>
     </section>
 
     <main class="container">
         <section class="blog-list">
-            <h3>Últimas Postagens</h3>
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px;">
+                <h3>Últimas do Blog</h3>
+                <a href="posts.html" style="font-weight: 600; font-size: 0.9rem; display: none; @media(min-width: 768px){display:block;}">Ver tudo &rarr;</a>
+            </div>
 
             <div id="posts-container" class="posts-grid" data-homepage="true">
                 <div class="skeleton-card">
                     <div class="skeleton-image"></div>
-                    <div class="skeleton-text"></div>
-                    <div class="skeleton-text short"></div>
+                    <div class="skeleton-text" style="width: 80%"></div>
+                    <div class="skeleton-text" style="width: 60%"></div>
                 </div>
                 <div class="skeleton-card">
                     <div class="skeleton-image"></div>
-                    <div class="skeleton-text"></div>
-                    <div class="skeleton-text short"></div>
+                    <div class="skeleton-text" style="width: 80%"></div>
+                    <div class="skeleton-text" style="width: 60%"></div>
                 </div>
                 <div class="skeleton-card">
                     <div class="skeleton-image"></div>
-                    <div class="skeleton-text"></div>
-                    <div class="skeleton-text short"></div>
+                    <div class="skeleton-text" style="width: 80%"></div>
+                    <div class="skeleton-text" style="width: 60%"></div>
                 </div>
             </div>
             
-            <div class="view-all-posts">
-                <a href="posts.html" class="cta-button outline">Ver Todas as Postagens</a>
+            <div class="view-all-posts" style="text-align: center; margin-top: 40px;">
+                <a href="posts.html" class="cta-button outline">Ver Todos os Artigos</a>
             </div>
         </section>
         
         <section id="about" class="about-section">
-            <div class="about-content">
-                <div class="about-image">
-                    <img src="logo.png" alt="Logo da SpectroTech">
+            <div class="about-image">
+                <img src="logo.png" alt="Logo SpectroTech" loading="lazy">
+            </div>
+            <div class="about-text">
+                <h3 style="font-size: 2rem; margin-bottom: 15px;">Sobre a SpectroTech</h3> 
+                <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 1.1rem;">
+                    Nascemos para decodificar a complexidade. Somos um portal dedicado a ir além das manchetes superficiais, oferecendo visão técnica acessível para desenvolvedores e entusiastas.
+                </p>
+                
+                <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 30px;">
+                    <span class="tag">Dev Web</span>
+                    <span class="tag">Cybersecurity</span>
+                    <span class="tag">Hardware</span>
+                    <span class="tag">Linux</span>
                 </div>
-                <div class="about-text">
-                    <h3>Sobre a SpectroTech</h3> 
-                    <h4 class="about-mission">Nossa Missão: Além das Manchetes</h4>
-                    <p>A SpectroTech é o seu portal de referência para desvendar todo o espectro do universo tecnológico. Nossa missão é ir além das manchetes, oferecendo uma cobertura profunda e analítica.</p>
-                    <p>Nossas principais editorias:</p>
-                    <div class="post-tags about-topics">
-                        <span class="tag">Sistemas Operacionais</span>
-                        <span class="tag">Desenvolvimento Web</span>
-                        <span class="tag">Hardware & Gadgets</span>
-                        <span class="tag">Segurança Digital</span>
-                    </div>
-                    <a href="https://github.com/PixelLabNI/SpectroTech" class="cta-button small">GitHub do Projeto</a>
-                </div>
+                
+                <a href="https://github.com/PixelLabNI/SpectroTech" target="_blank" class="cta-button small">
+                    <i data-feather="github" style="width: 16px; margin-right: 8px;"></i> GitHub do Projeto
+                </a>
             </div>
         </section>
     </main>
@@ -120,24 +124,21 @@
             <a href="https://github.com/PixelLabNI" target="_blank" aria-label="GitHub"><i data-feather="github"></i></a>
             <a href="https://www.instagram.com/pixellabni/" target="_blank" aria-label="Instagram"><i data-feather="instagram"></i></a>
         </div>
-        <p>SpectroTech | <a href="https://pixellabni.github.io/website/">Pixel Lab NI</a></p>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+            SpectroTech &copy; 2024 | Desenvolvido por <a href="https://pixellabni.github.io/website/" style="font-weight: 600;">Pixel Lab NI</a>
+        </p>
     </footer>
 
     <div id="cookie-consent-banner">
-        <div class="container cookie-container">
-            <p>Usamos cookies para melhorar sua experiência. <a href="#" target="_blank">Saiba mais</a>.</p>
-            <div class="cookie-buttons">
-                <button id="cookie-accept" class="cta-button small">Aceitar</button>
-                <button id="cookie-reject">Rejeitar</button>
-            </div>
+        <p style="margin-bottom: 10px; color: var(--text-main);">Utilizamos cookies para melhorar sua experiência de navegação.</p>
+        <div class="cookie-buttons">
+            <button id="cookie-reject">Rejeitar</button>
+            <button id="cookie-accept" class="cta-button small">Aceitar</button>
         </div>
     </div>
 
     <div class="menu-overlay"></div>
-
-    <button id="back-to-top" aria-label="Voltar ao topo">
-        <i data-feather="arrow-up"></i>
-    </button>
+    <button id="back-to-top" aria-label="Voltar ao topo"><i data-feather="arrow-up"></i></button>
 
     <script>feather.replace()</script>
     <script type="module" src="app.js"></script>
